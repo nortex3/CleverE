@@ -41,7 +41,7 @@ public class MainController implements Initializable {
     private void authUser(ActionEvent event) {
         
         String domain = "http://google.com";
-        String appId = "1536537523327125";
+        String appId = "1716266622025825";
         
         String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="+appId+"&redirect_uri="+domain+"&scope=user_about_me,"
                 + "user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_activities,user_birthday,user_education_history,"
