@@ -5,29 +5,45 @@
  */
 package authuser;
 
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.Event;
 import com.restfb.types.User;
+import com.restfb.types.User.Experience;
 import java.net.URL;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
+import static java.util.Collections.list;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 
 /**
  * FXML Controller class
  *
  * @author Azeem Tariq'
  */
-public class MainController implements Initializable {
+public class login implements Initializable {
+
+    
     @FXML
     private Button button;
     @FXML
     private Label message;
+    @FXML
+    private ListView<String> ListaEventos;
 
     /**
      * Initializes the controller class.
@@ -36,6 +52,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+  
 
     @FXML
     private void authUser(ActionEvent event) {
@@ -64,13 +81,29 @@ public class MainController implements Initializable {
             
                 FacebookClient fbClient = new DefaultFacebookClient(accessToken);
                 User user = fbClient.fetchObject("me",User.class);
+                Connection<Event> eventList =  fbClient.fetchConnection("search", Event.class,
+    Parameter.with("q", "braga"), Parameter.with("type", "event"));
+                
+                
+                ObservableList<String> items;
+                items = FXCollections.observableArrayList(eventList.toString());
+                ListaEventos.setItems(items);
                 
                 message.setText(user.getName());
+                
+                
+              
+               
+             
             
             }
         
         }
-        
+            
     }
+   
+
+
+
     
 }

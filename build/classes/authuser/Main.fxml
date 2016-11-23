@@ -6,9 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="authuser.MainController">
+<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authuser.login">
     <children>
-        <Button fx:id="button" layoutX="126" layoutY="90" onAction="#authUser" text="Login" />
-        <Label fx:id="message" layoutX="126.0" layoutY="146.0" minHeight="16" minWidth="69" />
+        <Button fx:id="button" layoutX="229.0" layoutY="14.0" onAction="#authUser" text="Login" />
+        <Label fx:id="message" layoutX="69.0" layoutY="53.0" minHeight="16" minWidth="67.0" prefHeight="17.0" prefWidth="186.0" />
+      <ListView fx:id="ListaEventos" editable="true" layoutX="10.0" layoutY="97.0" prefHeight="346.0" prefWidth="490.0" />
     </children>
 </AnchorPane>
