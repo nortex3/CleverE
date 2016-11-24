@@ -35,6 +35,8 @@ public class AfterLoginController implements Initializable {
     private Button button3;
     @FXML
     private TextField UserName;
+    
+    login lg = new login();
 
     /**
      * Initializes the controller class.
@@ -42,20 +44,23 @@ public class AfterLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-      
     }    
     
-    private void AfterLoginController(ActionEvent event) {
-     login controller = new login();
+    /*private void AfterLoginController(ActionEvent event) {
+        login controller = new login();
        
        
        User user = controller.getFbclient().fetchObject("me",User.class);
-       UserName.setText(user.getName());
+       label2.setText(user.getName());
+    }*/
+    
+    public void setName(String name){
+        label2.setText(name);
     }
 
-    @FXML
-    private void initialize(ActionEvent event) {
-    }
+    //@FXML
+    //private void initialize(ActionEvent event) {
+    //}
 
    
 }
