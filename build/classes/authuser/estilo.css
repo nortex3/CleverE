@@ -1,0 +1,17 @@
+.fondo{
+	-fx-background-image: url(./smart_city_blur.png);
+}
+
+.button{
+        -fx-font-weight: bold;
+        -fx-font-size: 15px;     
+}
+
+.label{
+        -fx-font-style: bold;
+        -fx-font-size: 30px;
+        -fx-text-fill: white;
+}
+
+
+

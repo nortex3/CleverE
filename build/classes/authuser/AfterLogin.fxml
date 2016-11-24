@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="822.0" styleClass="fondo" stylesheets="@estilosafterlogin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="label2" layoutX="242.0" layoutY="40.0" prefHeight="44.0" prefWidth="459.0" stylesheets="@estilosafterlogin.css" />
+      <TextField layoutX="44.0" layoutY="154.0" prefHeight="45.0" prefWidth="395.0" />
+      <Button fx:id="button2" layoutX="516.0" layoutY="154.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="263.0" text="Search events" />
+      <ListView layoutX="44.0" layoutY="228.0" prefHeight="330.0" prefWidth="735.0" />
+      <Button fx:id="button3" layoutX="575.0" layoutY="569.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="200.0" text="Exit" />
+      <ImageView fitHeight="127.0" fitWidth="180.0" layoutX="21.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@clever-logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
