@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authuser.login">
+<AnchorPane id="AnchorPane" prefHeight="615.0" prefWidth="822.0" styleClass="fondo" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authuser.login">
     <children>
-        <Button fx:id="button" layoutX="229.0" layoutY="14.0" onAction="#authUser" text="Login" />
-        <Label fx:id="message" layoutX="69.0" layoutY="53.0" minHeight="16" minWidth="67.0" prefHeight="17.0" prefWidth="186.0" />
-      <ListView fx:id="ListaEventos" editable="true" layoutX="10.0" layoutY="97.0" prefHeight="346.0" prefWidth="490.0" />
+        <Button fx:id="button" layoutX="306.0" layoutY="506.0" onAction="#handleButtonAction" opacity="0.73" prefHeight="65.0" prefWidth="251.0" text="Login" />
+      <Label layoutX="136.0" layoutY="25.0" prefHeight="101.0" prefWidth="591.0" text="Welcome to CleverE - Eventos de Braga" />
+      <ImageView fitHeight="342.0" fitWidth="475.0" layoutX="240.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@clever-logo.png" />
+         </image>
+         <effect>
+            <Lighting bumpInput="$null" diffuseConstant="1.42" specularConstant="0.14" specularExponent="14.88" surfaceScale="0.92">
+               <light>
+                  <Light.Distant elevation="141.28" />
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
     </children>
 </AnchorPane>

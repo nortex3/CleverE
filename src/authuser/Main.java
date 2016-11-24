@@ -10,9 +10,12 @@ import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
@@ -21,9 +24,11 @@ import javafx.stage.Stage;
  * @author alexandremirra
  */
 public class Main extends Application {
+   
     
       @Override
     public void start(Stage stage) throws Exception {
+        stage.setTitle("CleverE - Eventos da Cidade de Braga");
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         
         Scene scene = new Scene(root);
@@ -31,6 +36,9 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     } 
+    
+   
+    
 
     /*  *********INICIA OS AGENTES *******
     
