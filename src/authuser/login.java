@@ -12,6 +12,11 @@ import com.restfb.Parameter;
 import com.restfb.types.Event;
 import com.restfb.types.User;
 import com.restfb.types.User.Experience;
+import jade.core.AID;
+import jade.gui.GuiAgent;
+import jade.gui.GuiEvent;
+import jade.lang.acl.ACLMessage;
+import java.awt.EventQueue;
 import java.net.URL;
 import static java.nio.file.Files.list;
 import static java.rmi.Naming.list;
@@ -38,14 +43,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /**
  * FXML Controller class
  *
- * @author Azeem Tariq'
+ * @author Alexandre'
  */
 public class login implements Initializable {
 
     
     @FXML
     private Button button;
-    
+    FacebookClient fbClient;
+      
     
     
     //@FXML
@@ -58,7 +64,7 @@ public class login implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
+  
     public void initialize(URL url, ResourceBundle rb) {
         button.setOnAction(this::handleButtonAction);
     }    
@@ -66,6 +72,8 @@ public class login implements Initializable {
     @FXML
      private void handleButtonAction(ActionEvent event) {
      // Button was clicked, do something...
+     
+     
      
       String domain = "http://google.com";
         String appId = "1716266622025825";
@@ -89,8 +97,8 @@ public class login implements Initializable {
             
             driver.quit();
             
-                FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                User user = fbClient.fetchObject("me",User.class);
+            fbClient = new DefaultFacebookClient(accessToken);
+               
                 
      try{
             FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("AfterLogin.fxml"));
@@ -165,9 +173,18 @@ public class login implements Initializable {
             
     //}*/
    
-
+        
         }
      }
+     
+public void setFbclient(FacebookClient client){
+    this.fbClient = client;
+}
 
+public FacebookClient getFbclient(){
+    return this.fbClient;
+}
+    
+    
     
 }
