@@ -103,9 +103,14 @@ public class login implements Initializable {
      try{
             FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("AfterLogin.fxml"));
             Parent root1 = (Parent) fxmloader.load();
+            // Obtem os dados do utilizador
             User user = getFbclient().fetchObject("me",User.class);
+            //Obtem os eventos do utilizador
+            Connection<Event> eventList =  fbClient.fetchConnection("search", Event.class,
+            Parameter.with("q", "braga"), Parameter.with("type", "event"));
             AfterLoginController afterlogin = fxmloader.getController();
             afterlogin.setName(user.getName());
+            afterlogin.setEvento(eventList.getData());
             Scene stage1 = new Scene(root1);
             Stage login = (Stage) ((Node) event.getSource()).getScene().getWindow();
             login.hide();
