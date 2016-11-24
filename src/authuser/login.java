@@ -106,7 +106,7 @@ public class login implements Initializable {
             // Obtem os dados do utilizador
             User user = getFbclient().fetchObject("me",User.class);
             //Obtem os eventos do utilizador
-            Connection<Event> eventList =  fbClient.fetchConnection("search", Event.class,
+            Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
             Parameter.with("q", "braga"), Parameter.with("type", "event"));
             AfterLoginController afterlogin = fxmloader.getController();
             afterlogin.setName(user.getName());
