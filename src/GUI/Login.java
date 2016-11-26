@@ -39,7 +39,7 @@ public class Login extends javax.swing.JFrame {
      
     public Login() {
         initComponents();
-        setIcon();
+        //setIcon();
     }
     
     
@@ -54,34 +54,19 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Smart City Braga");
+        setTitle("CleverE - Eventos da Cidade de Braga");
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("WELCOME TO SMART CITY BRAGA");
+        jLabel2.setText("Welcome to CleverE Eventos de Braga");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(110, 10, 440, 50);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Username");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 160, 180, 30);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Password");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 230, 160, 30);
+        jLabel2.setBounds(220, 20, 490, 50);
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,17 +75,17 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(10, 310, 110, 30);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(10, 190, 180, 30);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(10, 260, 180, 30);
+        jButton1.setBounds(350, 390, 190, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\pedro\\Desktop\\AI\\tp-ai\\background.jpg")); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 630, 360);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/clever-logo.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(310, 80, 300, 280);
 
-        setSize(new java.awt.Dimension(647, 396));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 860, 500);
+
+        setSize(new java.awt.Dimension(878, 536));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,17 +181,14 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/pictures/icon.png")));
-    }
+    /*private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever-icon.png")));
+    }*/
     
     public void setFbclient(FacebookClient client){
     this.fbClient = client;

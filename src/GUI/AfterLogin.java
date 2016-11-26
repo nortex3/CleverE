@@ -18,7 +18,7 @@ public class AfterLogin extends javax.swing.JFrame {
      */
     public AfterLogin() {
         initComponents();
-        setIcon();
+        //setIcon();
     }
 
     /**
@@ -31,20 +31,17 @@ public class AfterLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Smart City Braga");
+        setTitle("CleverE - Eventos da Cidade de Braga");
         getContentPane().setLayout(null);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -52,86 +49,36 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Welcome Utilizador");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(250, 10, 120, 30);
+        jLabel2.setBounds(320, 30, 120, 30);
 
-        jButton1.setText("LogOut");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(510, 290, 110, 23);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desporto", "Cultura", "Música", "Festas" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(20, 290, 270, 20);
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Escolha as redes sociais que quer utilizar:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 160, 310, 14);
-
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("Facebook");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(20, 190, 110, 25);
-
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Instagram");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(270, 190, 110, 25);
-
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setText("Twitter");
-        getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(160, 190, 80, 25);
-
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jCheckBox4.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setText("LinkedIn");
-        getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(420, 190, 100, 23);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Se desejar filtrar os eventos por categorias selecione uma");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 250, 580, 30);
-
-        jButton2.setText("Pesquisar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(380, 290, 110, 23);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/clever-logo.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 630, 360);
-
-        jLabel5.setText("jLabel5");
+        jLabel1.setBounds(10, 10, 290, 220);
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(390, 20, 140, 20);
+        jLabel5.setBounds(460, 20, 190, 40);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(300, 130, 270, 40);
 
-        setSize(new java.awt.Dimension(647, 396));
+        jScrollPane1.setViewportView(jList1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(40, 240, 780, 200);
+
+        jButton1.setText("Search events");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(630, 130, 140, 40);
+
+        jButton2.setText("Exit");
+        getContentPane().add(jButton2);
+        jButton2.setBounds(703, 453, 130, 30);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(0, 0, 860, 500);
+
+        setSize(new java.awt.Dimension(878, 536));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Login l = new Login();
-        l.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,20 +118,17 @@ public class AfterLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/GUI/pictures/icon.png")));
-    }
+/*private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever-icon.png")));
+    }*/
 
 public void setName(String name){
         jLabel5.setText(name);
