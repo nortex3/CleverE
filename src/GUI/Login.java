@@ -135,7 +135,8 @@ public class Login extends javax.swing.JFrame {
      try{
             // Obtem os dados do utilizador
             UserData userdata = new UserData(fbClient);
-            user = userdata.getUser();
+            user = userdata.getUser("me");
+            
             //Obtem os eventos do utilizador
             // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
             // Parameter.with("q", "braga"), Parameter.with("type", "event"));

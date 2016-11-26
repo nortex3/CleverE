@@ -9,21 +9,32 @@ package Business;
  * @author Alexandre Mirra
  */
 import GUI.Login;
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.Event;
 import com.restfb.types.User;
 
+
+//  DADOS DO UTILIZADOR
 public class UserData {
     
     Login login = new Login();
     private FacebookClient fbclient = new DefaultFacebookClient();
     private User user;
+    private Connection<Event> EventList;
     
+    
+    // ESTE CONSTRUTOR NAO DA; ASSSIM E NECESSARIO PASSA O FBCLIENT:
+    public UserData() {
+        this.fbclient = login.getFbclient();
+        this.user = fbclient.fetchObject("me",User.class);
+    }
     
 
     public UserData(FacebookClient fbclient) {
         this.fbclient = fbclient;
-        this.user = fbclient.fetchObject("me",User.class);
     }
     
 
@@ -35,13 +46,23 @@ public class UserData {
         this.fbclient = fbclient;
     }
 
-    public User getUser() {
-        return user;
+    public User getUser(String parametro) {
+        return fbclient.fetchObject(parametro,User.class);
     }
 
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Connection<Event> getEventList(String parametro) {
+        return fbclient.fetchConnection("search", Event.class,Parameter.with("q",parametro), Parameter.with("type", "event"));
+    }
+
+    public void setEventList(Connection<Event> EventList) {
+        this.EventList = EventList;
+    }
+    
+    
     
     
     

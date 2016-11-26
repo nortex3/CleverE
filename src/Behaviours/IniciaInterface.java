@@ -21,11 +21,10 @@ public class IniciaInterface extends SequentialBehaviour{
     
     public IniciaInterface(Interface i){
         super(i);
+        this.addSubBehaviour(new PedeEventos(i));
+        this.addSubBehaviour(new RecebeInfoControlador(i));
+       
         }
-    
- 
- 
- 
  }
  
  
