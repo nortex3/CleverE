@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package GUI;
+import Business.UserData;
+
 
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
@@ -30,12 +32,17 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
-     private FacebookClient fbClient;
+     
+     
+      FacebookClient fbClient;
+      User user;
      
     public Login() {
         initComponents();
         setIcon();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,10 +134,11 @@ public class Login extends javax.swing.JFrame {
                 
      try{
             // Obtem os dados do utilizador
-            User user = getFbclient().fetchObject("me",User.class);
+            UserData userdata = new UserData(fbClient);
+            user = userdata.getUser();
             //Obtem os eventos do utilizador
-            Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
-            Parameter.with("q", "braga"), Parameter.with("type", "event"));
+            // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
+            // Parameter.with("q", "braga"), Parameter.with("type", "event"));
             AfterLogin al = new AfterLogin();
             al.setName(user.getName());
             
