@@ -1,1 +1,1 @@
-http://alexandres-mbp.lan:7778/acc
+http://DESKTOP-7U53GBT.lan:7778/acc

@@ -5,7 +5,7 @@
  */
 package Agents;
 
-import authuser.login;
+//import authuser.login;
 
 
 import com.restfb.Connection;
@@ -16,21 +16,28 @@ import com.restfb.types.User;
 
 import jade.core.Agent;
 import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 /**
  *
  * @author Miguel/Alexandre
  */
+
+
+
+
+
 public class Interface extends Agent {
     
-
     private FacebookClient fbClient;
-    private ListView<String> ListaEventos;
+    // private ArrayList<String> ListaEventos;
     
      public Interface(){
-        // this.fbClient = new login.authUser();
-        this.ListaEventos = new ListView<>();
+        this.fbClient = new DefaultFacebookClient();
+        // this.ListaEventos = new ArrayList<>();
     }
      
     
@@ -40,6 +47,19 @@ public class Interface extends Agent {
         //this.addBehaviour(new IniciaInterface(this));
        
         System.out.println("Interface a iniciar..");
+    }
+    
+    protected void takeDown() {
+        super.takeDown(); //To change body of generated methods, choose Tools | Templates.
+            System.out.println("Interface a terminar..");
+    }
+    
+    public void setFbClient(FacebookClient client){
+        this.fbClient = client;
+    }
+    
+    public FacebookClient getFbClient(){
+        return this.fbClient;
     }
     
  
