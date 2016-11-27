@@ -17,7 +17,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author pedro
+ * @author pedro/alexandre
  */
 public class AfterLogin extends javax.swing.JFrame {
     
