@@ -57,6 +57,10 @@ public class UserData {
     public Connection<Event> getEventList(String parametro) {
         return fbclient.fetchConnection("search", Event.class,Parameter.with("q",parametro), Parameter.with("type", "event"), Parameter.with("location", "braga") );
     }
+    
+    public Connection<Event> getMyEventList() {
+        return fbclient.fetchConnection("me/events", Event.class);
+    }
 
     public void setEventList(Connection<Event> EventList) {
         this.EventList = EventList;
