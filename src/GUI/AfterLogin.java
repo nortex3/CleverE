@@ -23,6 +23,7 @@ public class AfterLogin extends javax.swing.JFrame {
     
     private UserData userdata;
      private Connection<Event> eventList;
+     private Connection<Event> MyeventList;
 
     /**
      * Creates new form AfterLogin
@@ -54,6 +55,7 @@ public class AfterLogin extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,8 +92,22 @@ public class AfterLogin extends javax.swing.JFrame {
         jButton1.setBounds(630, 130, 140, 40);
 
         jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(703, 453, 130, 30);
+
+        jButton3.setText("Meus Eventos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(60, 460, 130, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -117,6 +133,25 @@ public class AfterLogin extends javax.swing.JFrame {
         this.jList1.setModel(list);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        MyeventList = userdata.getMyEventList();
+        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
+        DefaultListModel list = new DefaultListModel();
+     
+        for(List<Event> s : MyeventList){
+            s.forEach((e) -> {
+                list.addElement(e.getName());
+           });
+        }
+        //this.jList1 = new JList(list);
+        this.jList1.setModel(list);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +191,7 @@ public class AfterLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
