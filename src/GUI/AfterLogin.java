@@ -6,7 +6,14 @@
 package GUI;
 
 import Business.UserData;
+import com.restfb.Connection;
+import com.restfb.FacebookClient;
+import com.restfb.types.Event;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -15,6 +22,7 @@ import java.awt.Toolkit;
 public class AfterLogin extends javax.swing.JFrame {
     
     private UserData userdata;
+     private Connection<Event> eventList;
 
     /**
      * Creates new form AfterLogin
@@ -25,7 +33,8 @@ public class AfterLogin extends javax.swing.JFrame {
     }
     
     public AfterLogin(UserData ud){
-        this.userdata = ud;
+    initComponents();
+    this.userdata = ud;
     }
 
     /**
@@ -72,6 +81,11 @@ public class AfterLogin extends javax.swing.JFrame {
         jScrollPane1.setBounds(40, 240, 780, 200);
 
         jButton1.setText("Search events");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(630, 130, 140, 40);
 
@@ -86,6 +100,23 @@ public class AfterLogin extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(878, 536));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+       String parametro = jTextField1.getText();
+       eventList = userdata.getEventList(parametro);
+        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
+        DefaultListModel list = new DefaultListModel();
+     
+        for(List<Event> s : eventList){
+            s.forEach((e) -> {
+                list.addElement(e.getName());
+           });
+        }
+        //this.jList1 = new JList(list);
+        this.jList1.setModel(list);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

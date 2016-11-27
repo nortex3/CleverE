@@ -126,7 +126,7 @@ public class Login extends javax.swing.JFrame {
             //Obtem os eventos do utilizador
             // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
             // Parameter.with("q", "braga"), Parameter.with("type", "event"));
-            AfterLogin al = new AfterLogin();
+            AfterLogin al = new AfterLogin(userdata);
             al.setName(user.getName());
             
             
