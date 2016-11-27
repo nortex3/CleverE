@@ -141,7 +141,7 @@ public class AfterLogin extends javax.swing.JFrame {
         DefaultListModel list = new DefaultListModel();
      
         for(List<Event> s : MyeventList){
-            s.forEach((e) -> {
+              s.forEach((e) -> {
                 list.addElement(e.getName());
            });
         }

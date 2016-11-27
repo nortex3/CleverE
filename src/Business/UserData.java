@@ -24,7 +24,7 @@ public class UserData {
     private FacebookClient fbclient = new DefaultFacebookClient();
     private User user;
     private Connection<Event> EventList;
-    
+     private Connection<Event> MyEventList;
     
     // ESTE CONSTRUTOR NAO DA; ASSSIM E NECESSARIO PASSA O FBCLIENT:
     public UserData() {
@@ -59,11 +59,23 @@ public class UserData {
     }
     
     public Connection<Event> getMyEventList() {
-        return fbclient.fetchConnection("me/events", Event.class);
+        return fbclient.fetchConnection("me/events", Event.class,Parameter.with("type","attending"));
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     public void setEventList(Connection<Event> EventList) {
         this.EventList = EventList;
+    }
+    
+     public void setMyEventList(Connection<Event> MyEventList) {
+        this.MyEventList = MyEventList;
     }
     
     
