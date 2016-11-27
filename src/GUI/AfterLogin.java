@@ -5,15 +5,18 @@
  */
 package GUI;
 
+import Agents.Interface;
 import Business.UserData;
 import com.restfb.Connection;
 import com.restfb.FacebookClient;
 import com.restfb.types.Event;
+import jade.gui.GuiEvent;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,6 +27,8 @@ public class AfterLogin extends javax.swing.JFrame {
     private UserData userdata;
      private Connection<Event> eventList;
      private Connection<Event> MyeventList;
+     private Interface myAgent;
+     public JFrame frame;
 
     /**
      * Creates new form AfterLogin
@@ -36,6 +41,11 @@ public class AfterLogin extends javax.swing.JFrame {
     public AfterLogin(UserData ud){
     initComponents();
     this.userdata = ud;
+    }
+    
+     public AfterLogin(Interface a){
+        initComponents();
+        myAgent = a;
     }
 
     /**
@@ -50,7 +60,7 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
@@ -74,8 +84,8 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel1.setBounds(10, 10, 290, 220);
         getContentPane().add(jLabel5);
         jLabel5.setBounds(460, 20, 190, 40);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(300, 130, 270, 40);
+        getContentPane().add(textField);
+        textField.setBounds(300, 130, 270, 40);
 
         jScrollPane1.setViewportView(jList1);
 
@@ -119,7 +129,7 @@ public class AfterLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-       String parametro = jTextField1.getText();
+       String parametro = textField.getText();
        eventList = userdata.getEventList(parametro);
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
         DefaultListModel list = new DefaultListModel();
@@ -135,6 +145,10 @@ public class AfterLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        textField.getText();
+        GuiEvent ge = new GuiEvent(textField.getText(),1);
+        myAgent.postGuiEvent(ge);
         
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
@@ -198,7 +212,7 @@ public class AfterLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 /*private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever-icon.png")));
