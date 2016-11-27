@@ -68,6 +68,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(220, 20, 490, 50);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/facebook-icon.png"))); // NOI18N
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +76,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(350, 390, 190, 50);
+        jButton1.setBounds(380, 400, 140, 50);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/clever-logo.png"))); // NOI18N
         getContentPane().add(jLabel3);
