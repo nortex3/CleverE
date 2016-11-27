@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Business.UserData;
 import java.awt.Toolkit;
 
 /**
@@ -12,6 +13,8 @@ import java.awt.Toolkit;
  * @author pedro
  */
 public class AfterLogin extends javax.swing.JFrame {
+    
+    private UserData userdata;
 
     /**
      * Creates new form AfterLogin
@@ -19,6 +22,10 @@ public class AfterLogin extends javax.swing.JFrame {
     public AfterLogin() {
         initComponents();
         //setIcon();
+    }
+    
+    public AfterLogin(UserData ud){
+        this.userdata = ud;
     }
 
     /**
