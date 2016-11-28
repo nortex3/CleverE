@@ -29,11 +29,11 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         
         if (recebida != null) {
             if (recebida.getPerformative() == ACLMessage.INFORM) {
-                if (recebida.getContent().matches("evento:.+")){
-                    String[] eventos = recebida.getContent().split(":");
+                if (recebida.getContent().matches("evento:")){
+                    //String[] eventos = recebida.getContent().split(":");
                     //for(String ss : eventos[1].split(";"))
                         //processa a mensagem    
-                        System.out.println(eventos[1]);
+                        System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
                         }
             } else {System.out.println(recebida.getSender().getLocalName() + " -> " + recebida.getContent());
                 System.out.println("Interface: Recebi mensagem que não me interessa");

@@ -22,7 +22,7 @@ public class RecebePedidosInterface extends CyclicBehaviour {
             if(mensagem.getPerformative() == ACLMessage.REQUEST){
                 
                 if(mensagem.getContent().equals("evento:")){
-                    //System.out.println(mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
+                    System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
                     String mens=mensagem.getContent();
                     new EnviaEvento(this.cont,mens).action();
                     block();

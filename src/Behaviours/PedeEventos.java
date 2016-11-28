@@ -6,13 +6,14 @@
 package Behaviours;
 import Agents.Interface;
 import jade.core.AID;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 /**
  *
  * @author NMVC
  */
-public class PedeEventos extends OneShotBehaviour{
+public class PedeEventos extends CyclicBehaviour{
     
     private Interface iface;
 
@@ -31,6 +32,7 @@ public class PedeEventos extends OneShotBehaviour{
         msg.setConversationId("");
 
         msg.setContent("evento:");
+        System.out.println("Interface a pedir "+msg.getContent());
 
         this.iface.send(msg);
 

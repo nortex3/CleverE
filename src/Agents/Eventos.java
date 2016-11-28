@@ -39,7 +39,7 @@ public class Eventos extends Agent{
                         //UserData userdata = new UserData();
 
                         //str+=userdata.getFbclient(); 
-                        str+="Temos de acreditar que o FCP vai ser campeao!!! ";
+                        str+="RECEBI O PEDIDO DO CONTROLADOR ->>> A enviar evento: EVENTO FCP ";
                         //str+=//gets
                         reply.setContent(str);
                         reply.setPerformative(ACLMessage.INFORM);

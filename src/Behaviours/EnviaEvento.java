@@ -6,6 +6,7 @@
 package Behaviours;
 import Agents.Controlador;
 import jade.core.AID;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author NMVC
  */
-public class EnviaEvento extends OneShotBehaviour{
+public class EnviaEvento extends CyclicBehaviour{
     
     private Controlador cont;
     String mens;
@@ -39,8 +40,8 @@ public class EnviaEvento extends OneShotBehaviour{
             resp = this.cont.blockingReceive(3000);
             if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
                 if(resp.getContent()!= null) {
-                    //System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
-                    //conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
+                    System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
+                    conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
                     conteudo+=resp.getContent();
                 }
             }
