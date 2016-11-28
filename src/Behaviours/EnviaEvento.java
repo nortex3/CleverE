@@ -30,9 +30,9 @@ public class EnviaEvento extends OneShotBehaviour{
         ACLMessage resp = null;
         msg.setConversationId("");
         msg.setContent(this.mens);
-        AID even = new AID();
-        even.setLocalName("even");
-        msg.addReceiver(even);
+        AID eventos = new AID();
+        eventos.setLocalName("eventos");
+        msg.addReceiver(eventos);
         
         this.cont.send(msg);
  
@@ -50,13 +50,13 @@ public class EnviaEvento extends OneShotBehaviour{
         conteudo = conteudo.substring(0,conteudo.length()-1);
 
         ACLMessage nova = new ACLMessage(ACLMessage.INFORM);
-        AID iefe = new AID();
-        iefe.setLocalName("interface");
-        nova.addReceiver(iefe);
+        AID inter = new AID();
+        inter.setLocalName("inter");
+        nova.addReceiver(inter);
         nova.setConversationId("");
         nova.setContent(conteudo);
 
         this.cont.send(nova);
-
+        
     }
 }

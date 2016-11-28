@@ -146,9 +146,10 @@ public class AfterLogin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        textField.getText();
-        GuiEvent ge = new GuiEvent(textField.getText(),1);
-        myAgent.postGuiEvent(ge);
+        String mensagem=textField.getText();
+        //GuiEvent ge;
+       // ge = new GuiEvent(mensagem,1);
+       // myAgent.postGuiEvent(ge);
         
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();

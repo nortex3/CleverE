@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Agents;
+import Business.UserData;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -18,16 +19,11 @@ public class Eventos extends Agent{
         System.out.println("Agente " + this.getLocalName() + " a iniciar...");
         this.addBehaviour(new ReceiveBehaviour());
     }
-
-   
+     
     protected void takeDown(){
         super.takeDown();
         System.out.println(this.getLocalName()+" a morrer...");
     }
-
-   
-   
-
 
     private class ReceiveBehaviour extends CyclicBehaviour {
 
@@ -37,10 +33,13 @@ public class Eventos extends Agent{
             String str="";
             if (msg != null) {
                 ACLMessage reply = msg.createReply();
-
+                
                 if (msg.getPerformative() == ACLMessage.REQUEST) {
                     if (msg.getContent().equals("evento:")) {
-                         
+                        //UserData userdata = new UserData();
+
+                        //str+=userdata.getFbclient(); 
+                        str+="Temos de acreditar que o FCP vai ser campeao!!! ";
                         //str+=//gets
                         reply.setContent(str);
                         reply.setPerformative(ACLMessage.INFORM);

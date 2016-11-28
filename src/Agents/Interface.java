@@ -8,6 +8,7 @@ package Agents;
 //import authuser.login;
 
 
+import Behaviours.IniciaInterface;
 import GUI.AfterLogin;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
@@ -47,13 +48,14 @@ public class Interface extends Agent {
     }
      
     
+    @Override
     protected void setup() {
-        myGui = new AfterLogin(this);
-        myGui.frame.setVisible(true);
+        //myGui = new AfterLogin(this);
+        //myGui.frame.setVisible(true);
         
         super.setup();
         //adicionar behaviours aqui
-        //this.addBehaviour(new IniciaInterface(this));
+        this.addBehaviour(new IniciaInterface(this));
        
         System.out.println("Interface a iniciar..");
     }

@@ -24,10 +24,10 @@ public class PedeEventos extends OneShotBehaviour{
     public void action() {
 
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-        AID cont = new AID();
-        cont.setLocalName("cont");
+        AID controlador = new AID();
+        controlador.setLocalName("controlador");
 
-        msg.addReceiver(cont);
+        msg.addReceiver(controlador);
         msg.setConversationId("");
 
         msg.setContent("evento:");
