@@ -35,16 +35,18 @@ public class AfterLogin extends javax.swing.JFrame {
      */
     public AfterLogin() {
         initComponents();
-        //setIcon();
+        setIcon();
     }
     
     public AfterLogin(UserData ud){
     initComponents();
+    setIcon();
     this.userdata = ud;
     }
     
      public AfterLogin(Interface a){
         initComponents();
+        setIcon();
         myAgent = a;
     }
 
@@ -66,6 +68,12 @@ public class AfterLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,20 +85,23 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Welcome Utilizador");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(320, 30, 120, 30);
+        jLabel2.setBounds(320, 10, 120, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/clever-logo.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 290, 220);
+        jLabel1.setBounds(10, 0, 290, 230);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(460, 20, 190, 40);
+        jLabel5.setBounds(450, 10, 190, 30);
         getContentPane().add(textField);
-        textField.setBounds(300, 130, 270, 40);
+        textField.setBounds(320, 60, 270, 40);
 
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(40, 240, 780, 200);
+        jScrollPane1.setBounds(20, 250, 780, 200);
 
         jButton1.setText("Search events");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +110,7 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(630, 130, 140, 40);
+        jButton1.setBounds(630, 60, 140, 40);
 
         jButton2.setText("Exit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,16 +119,48 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(703, 453, 130, 30);
+        jButton2.setBounds(670, 460, 130, 30);
 
-        jButton3.setText("Meus Eventos");
+        jButton3.setText("My Events");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(60, 460, 130, 30);
+        jButton3.setBounds(20, 460, 130, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Aceita Chuva?");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(320, 120, 110, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Temperatura Mínima");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(450, 120, 130, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Temperatura Máxima");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(590, 120, 150, 30);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(320, 160, 80, 20);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-5", "0", "5", "10", "15", "20" }));
+        getContentPane().add(jComboBox2);
+        jComboBox2.setBounds(450, 160, 80, 20);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "15", "20", "25", "30", "35", "40", "45" }));
+        getContentPane().add(jComboBox3);
+        jComboBox3.setBounds(590, 160, 80, 20);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -168,6 +211,10 @@ public class AfterLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,17 +254,23 @@ public class AfterLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
-/*private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever-icon.png")));
-    }*/
+private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever_icon.png")));
+ }
 
 public void setName(String name){
         jLabel5.setText(name);

@@ -48,7 +48,7 @@ public class EnviaEvento extends CyclicBehaviour{
         
 
         
-        conteudo = conteudo.substring(0,conteudo.length()-1);
+        /*conteudo = conteudo.substring(0,conteudo.length()-1);
 
         ACLMessage nova = new ACLMessage(ACLMessage.INFORM);
         AID inter = new AID();
@@ -57,7 +57,7 @@ public class EnviaEvento extends CyclicBehaviour{
         nova.setConversationId("");
         nova.setContent(conteudo);
 
-        this.cont.send(nova);
+        this.cont.send(nova);*/
         
     }
 }

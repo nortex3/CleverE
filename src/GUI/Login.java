@@ -39,7 +39,7 @@ public class Login extends javax.swing.JFrame {
      
     public Login() {
         initComponents();
-        //setIcon();
+        setIcon();
     }
     
     
@@ -187,9 +187,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 
-    /*private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever-icon.png")));
-    }*/
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever_icon.png")));
+    }
     
     public void setFbclient(FacebookClient client){
     this.fbClient = client;

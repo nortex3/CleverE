@@ -29,7 +29,7 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         
         if (recebida != null) {
             if (recebida.getPerformative() == ACLMessage.INFORM) {
-                if (recebida.getContent().matches("evento:")){
+                if (recebida.getContent().matches("evento:.+")){
                     //String[] eventos = recebida.getContent().split(":");
                     //for(String ss : eventos[1].split(";"))
                         //processa a mensagem    
