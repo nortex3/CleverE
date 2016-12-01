@@ -74,6 +74,8 @@ public class AfterLogin extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,10 +100,15 @@ public class AfterLogin extends javax.swing.JFrame {
         getContentPane().add(textField);
         textField.setBounds(320, 60, 270, 40);
 
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 250, 780, 200);
+        jScrollPane1.setBounds(20, 250, 330, 200);
 
         jButton1.setText("Search events");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +169,13 @@ public class AfterLogin extends javax.swing.JFrame {
         getContentPane().add(jComboBox3);
         jComboBox3.setBounds(590, 160, 80, 20);
 
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane2.setViewportView(textArea);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(390, 250, 450, 200);
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 860, 500);
@@ -215,6 +229,31 @@ public class AfterLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void mostraEventoCompleto(String item){
+        
+        MyeventList = userdata.getMyEventList();
+        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
+        DefaultListModel list = new DefaultListModel();
+     
+        for(List<Event> s : MyeventList){
+              s.forEach((e) -> {
+                if(e.getName().equals(item)){
+                    textArea.setText(e.toString());
+                }
+                //ist.addElement(e.getName());
+           });
+        }
+        
+    }
+    
+    
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        String selected = jList1.getSelectedValue().toString();
+        this.mostraEventoCompleto(selected);
+        //textArea.setText(selected);
+    }//GEN-LAST:event_jList1ValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +305,8 @@ public class AfterLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea textArea;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 private void setIcon() {
