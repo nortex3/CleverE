@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import Agents.Interface;
 import Business.UserData;
 
 
@@ -32,11 +33,18 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
+    private Interface inter;
      
+    FacebookClient fbClient;
+    User user;
      
-      FacebookClient fbClient;
-      User user;
-     
+    
+    public Login(Interface i){
+        initComponents();
+        setIcon();
+        this.inter= i;
+    }
+    
     public Login() {
         initComponents();
         setIcon();
@@ -122,11 +130,12 @@ public class Login extends javax.swing.JFrame {
             // Obtem os dados do utilizador
             UserData userdata = new UserData(fbClient);
             user = userdata.getUser("me");
+            Interface it = new Interface();
             
             //Obtem os eventos do utilizador
             // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
             // Parameter.with("q", "braga"), Parameter.with("type", "event"));
-            AfterLogin al = new AfterLogin(userdata);
+            AfterLogin al = new AfterLogin(userdata,it);
             al.setName(user.getName());
             
             
@@ -175,7 +184,8 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                Interface interfac = new Interface();
+                new Login(interfac).setVisible(true);
             }
         });
     }

@@ -18,10 +18,14 @@ public class RecebePedidosInterface extends CyclicBehaviour {
     @Override
     public void action() {
         ACLMessage mensagem = this.cont.receive();
+        //System.out.println("Entrei aqui");
+        //if(mensagem == null){
+          //  System.out.println("Nao tem nada");
+        //}
         if(mensagem != null){
             if(mensagem.getPerformative() == ACLMessage.REQUEST){
                 
-                if(mensagem.getContent().equals("evento:")){
+                if(mensagem.getContent().equals("braga")){
                     System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
                     String mens=mensagem.getContent();
                     new EnviaEvento(this.cont,mens).action();

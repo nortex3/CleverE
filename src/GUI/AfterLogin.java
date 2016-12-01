@@ -28,7 +28,8 @@ public class AfterLogin extends javax.swing.JFrame {
      private Connection<Event> eventList;
      private Connection<Event> MyeventList;
      private Interface myAgent;
-     public JFrame frame;
+     //public JFrame frame;
+     //private Interface interfa;
 
     /**
      * Creates new form AfterLogin
@@ -38,10 +39,11 @@ public class AfterLogin extends javax.swing.JFrame {
         setIcon();
     }
     
-    public AfterLogin(UserData ud){
+    public AfterLogin(UserData ud,Interface i){
     initComponents();
     setIcon();
     this.userdata = ud;
+    this.myAgent = i;
     }
     
      public AfterLogin(Interface a){
@@ -207,6 +209,14 @@ public class AfterLogin extends javax.swing.JFrame {
         //GuiEvent ge;
        // ge = new GuiEvent(mensagem,1);
        // myAgent.postGuiEvent(ge);
+       
+       GuiEvent ge = new GuiEvent(mensagem,1);
+        System.out.println("criei o guievent");
+        if(myAgent==null){
+            System.out.println("agente esta nulo");
+        }
+        myAgent.postGuiEvent(ge);
+        System.out.println("ola");
         
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();

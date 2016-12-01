@@ -9,7 +9,9 @@ package Agents;
 
 
 import Behaviours.IniciaInterface;
+import Behaviours.RecebeInfoControlador;
 import GUI.AfterLogin;
+import GUI.Login;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -18,6 +20,7 @@ import com.restfb.types.User;
 import jade.core.AID;
 
 import jade.core.Agent;
+import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
@@ -35,9 +38,9 @@ import javafx.scene.control.ListView;
 
 
 
-public class Interface extends Agent {
+public class Interface extends GuiAgent {
     
-    protected AfterLogin myGui;
+    protected Login myGui;
     
     private FacebookClient fbClient;
     // private ArrayList<String> ListaEventos;
@@ -50,19 +53,22 @@ public class Interface extends Agent {
     
     @Override
     protected void setup() {
-        //myGui = new AfterLogin(this);
-        //myGui.frame.setVisible(true);
+        myGui = new Login(this);
+        System.out.println("Interface a iniciar..");
+        myGui.setVisible(true);
         
         super.setup();
+        
         //adicionar behaviours aqui
-        this.addBehaviour(new IniciaInterface(this));
+        //this.addBehaviour(new IniciaInterface(this));
+        this.addBehaviour(new RecebeInfoControlador(this));
        
-        System.out.println("Interface a iniciar..");
+       
     }
     
     protected void onGuiEvent(GuiEvent ev){
         int comand= ev.getType();
-        
+        System.out.println("vou entrar no if");
         if(comand==1){
             String content = (String)ev.getSource();
             AID receiver = new AID();
@@ -74,6 +80,7 @@ public class Interface extends Agent {
             msg.addReceiver(receiver);
             send(msg);
         }
+        System.out.println("passei pelo if");
     }
 	
     
@@ -91,9 +98,7 @@ public class Interface extends Agent {
     }
     
  
-    public void postGuiEvent(GuiEvent ge) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     
 }
