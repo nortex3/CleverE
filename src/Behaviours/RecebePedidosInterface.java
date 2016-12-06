@@ -32,10 +32,16 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                     new EnviaEvento(this.cont,mens).action();
                     block();
                 }
+                
+             
                
             
             
-            else {
+            else if(mensagem.getContent().equals("daAgentes")){
+                    new DaAgentesBehaviour(this.cont).action();
+                    block();
+            }
+            else{
                     AID receiver = new AID();
                     receiver.setLocalName("inter");
                     long time = System.currentTimeMillis();

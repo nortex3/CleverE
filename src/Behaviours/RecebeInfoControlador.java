@@ -8,6 +8,7 @@ import Agents.Interface;
 import GUI.AfterLogin;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,6 +19,7 @@ import jade.lang.acl.ACLMessage;
 public class RecebeInfoControlador extends CyclicBehaviour{
     
     private Interface inter;
+    //private AfterLogin aft;
     
     public RecebeInfoControlador(Interface i) {
         this.inter = i;
@@ -36,6 +38,16 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                         //processa a mensagem    
                         System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
                         }
+                else if(recebida.getContent().matches("agentes:.+")){
+                    String[] agentes = recebida.getContent().split(":");
+                    //for(String ss: agentes[1].split(";")){
+                        AfterLogin aft = new AfterLogin();
+                        aft.mostraAgentes(agentes);
+                        
+                        
+                        //System.out.println(ss);
+                    //}
+                }
             } else if(recebida.getPerformative() == ACLMessage.NOT_UNDERSTOOD){
                 AfterLogin af = new AfterLogin();
                 af.mostraOptionPane();

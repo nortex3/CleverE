@@ -44,6 +44,7 @@ public class AfterLogin extends javax.swing.JFrame {
     public AfterLogin() {
         initComponents();
         setIcon();
+        this.textArea2.setEnabled(true);
     }
     
     public AfterLogin(UserData ud,Interface i){
@@ -56,7 +57,7 @@ public class AfterLogin extends javax.swing.JFrame {
     this.jButton3.setEnabled(false);
     this.textField.setEnabled(false);
     this.jList1.setEnabled(false);
-    this.jList2.setEnabled(false);
+    this.textArea2.setEnabled(false);
     this.textArea.setEnabled(false);
     this.jComboBox1.setEnabled(false);
     this.jComboBox2.setEnabled(false);
@@ -68,7 +69,7 @@ public class AfterLogin extends javax.swing.JFrame {
     this.jLabel4.setEnabled(false);
     this.jLabel7.setEnabled(false);
     this.jLabel11.setEnabled(false);
-   
+    
     }
     
      public AfterLogin(Interface a){
@@ -80,7 +81,7 @@ public class AfterLogin extends javax.swing.JFrame {
         this.jButton3.setEnabled(false);
         this.textField.setEnabled(false);
         this.jList1.setEnabled(false);
-        this.jList2.setEnabled(false);
+        this.textArea2.setEnabled(false);
         this.textArea.setEnabled(false);
         this.jComboBox1.setEnabled(false);
         this.jComboBox2.setEnabled(false);
@@ -121,13 +122,13 @@ public class AfterLogin extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textArea2 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -229,11 +230,6 @@ public class AfterLogin extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(290, 270, 390, 200);
 
-        jScrollPane3.setViewportView(jList2);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(730, 270, 190, 200);
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Lista de Eventos:");
         getContentPane().add(jLabel8);
@@ -247,7 +243,7 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Agentes de Recolha de Informação");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(730, 240, 170, 30);
+        jLabel10.setBounds(730, 240, 210, 30);
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Utilizador");
@@ -263,6 +259,13 @@ public class AfterLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jButton4);
         jButton4.setBounds(770, 120, 140, 50);
+
+        textArea2.setColumns(20);
+        textArea2.setRows(5);
+        jScrollPane4.setViewportView(textArea2);
+
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(720, 270, 220, 200);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -329,7 +332,7 @@ public class AfterLogin extends javax.swing.JFrame {
         
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
-        DefaultListModel list = new DefaultListModel();
+        //DefaultListModel list = new DefaultListModel();
      
         for(List<Event> s : MyeventList){
               s.forEach((e) -> {
@@ -345,6 +348,28 @@ public class AfterLogin extends javax.swing.JFrame {
     public void mostraOptionPane(){
         JOptionPane.showMessageDialog(null,"Not UnderStood");
     }
+    
+    
+    public void mostraAgentes(String[] agt){
+        //DefaultListModel l = new DefaultListModel();
+        System.out.println("ESTOU NULO");
+        
+        
+        for(String ss: agt[1].split(";")){
+            System.out.println(ss);
+            textArea2.setText(ss);
+        }
+        //this.jList1 = new JList(list);
+        //this.jList2.setModel(l);
+    }
+    
+    /*
+    public void mostraAgentes(String ss){
+        
+        textArea.setText(ss);
+        
+        
+    }*/
     
     
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -400,7 +425,7 @@ public class AfterLogin extends javax.swing.JFrame {
             this.jButton3.setEnabled(true);
             this.textField.setEnabled(true);
             this.jList1.setEnabled(true);
-            this.jList2.setEnabled(true);
+            this.textArea.setEnabled(true);
             this.textArea.setEnabled(true);
             this.jComboBox1.setEnabled(true);
             this.jComboBox2.setEnabled(true);
@@ -484,11 +509,11 @@ public class AfterLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea textArea;
+    private javax.swing.JTextArea textArea2;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 private void setIcon() {

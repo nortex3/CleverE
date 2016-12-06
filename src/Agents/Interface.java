@@ -9,6 +9,7 @@ package Agents;
 
 
 import Behaviours.IniciaInterface;
+import Behaviours.PedeListaAgentes;
 import Behaviours.RecebeInfoControlador;
 import GUI.AfterLogin;
 import GUI.Login;
@@ -61,6 +62,7 @@ public class Interface extends GuiAgent {
         
         //adicionar behaviours aqui
         //this.addBehaviour(new IniciaInterface(this));
+        this.addBehaviour(new PedeListaAgentes(this));
         this.addBehaviour(new RecebeInfoControlador(this));
        
        
