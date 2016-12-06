@@ -35,7 +35,7 @@ public class Eventos extends Agent{
                 ACLMessage reply = msg.createReply();
                 
                 if (msg.getPerformative() == ACLMessage.REQUEST) {
-                    if (msg.getContent().equals("evento:")) {
+                    if (msg.getContent().equals("braga")) {
                         //UserData userdata = new UserData();
 
                         //str+=userdata.getFbclient(); 
@@ -45,10 +45,13 @@ public class Eventos extends Agent{
                         reply.setPerformative(ACLMessage.INFORM);
                         myAgent.send(reply);
                         }
-                } else {
+                } else if(msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL){
+                          System.out.println("Tudo OK");}
+                          else{
                     reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
                     myAgent.send(reply);
-                }
+                                  }
+                
             }
             block();
         }

@@ -40,7 +40,7 @@ import javafx.scene.control.ListView;
 
 public class Interface extends GuiAgent {
     
-    protected Login myGui;
+    protected AfterLogin myGui;
     
     private FacebookClient fbClient;
     // private ArrayList<String> ListaEventos;
@@ -53,7 +53,7 @@ public class Interface extends GuiAgent {
     
     @Override
     protected void setup() {
-        myGui = new Login(this);
+        myGui = new AfterLogin(this);
         System.out.println("Interface a iniciar..");
         myGui.setVisible(true);
         

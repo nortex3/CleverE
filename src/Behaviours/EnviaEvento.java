@@ -26,7 +26,7 @@ public class EnviaEvento extends CyclicBehaviour{
     
     @Override
     public void action() {
-        String conteudo="evento:";
+        String conteudo="braga";
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         ACLMessage resp = null;
         msg.setConversationId("");
@@ -40,6 +40,15 @@ public class EnviaEvento extends CyclicBehaviour{
             resp = this.cont.blockingReceive(3000);
             if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
                 if(resp.getContent()!= null) {
+                    AID receiver = new AID();
+                    receiver.setLocalName("eventos");
+                    long time = System.currentTimeMillis();
+                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    accept.setContent("recebi");
+                    accept.setConversationId(""+time);
+                    accept.addReceiver(receiver);
+                    this.cont.send(accept);
+                    
                     System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
                     conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
                     conteudo+=resp.getContent();

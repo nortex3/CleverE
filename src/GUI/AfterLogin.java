@@ -8,8 +8,10 @@ package GUI;
 import Agents.Interface;
 import Business.UserData;
 import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.types.Event;
+import com.restfb.types.User;
 import jade.gui.GuiEvent;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -17,6 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  *
@@ -28,6 +33,8 @@ public class AfterLogin extends javax.swing.JFrame {
      private Connection<Event> eventList;
      private Connection<Event> MyeventList;
      private Interface myAgent;
+     FacebookClient fbClient;
+    User user;
      //public JFrame frame;
      //private Interface interfa;
 
@@ -44,12 +51,46 @@ public class AfterLogin extends javax.swing.JFrame {
     setIcon();
     this.userdata = ud;
     this.myAgent = i;
+    this.jButton1.setEnabled(false);
+    this.jButton2.setEnabled(false);
+    this.jButton3.setEnabled(false);
+    this.textField.setEnabled(false);
+    this.jList1.setEnabled(false);
+    this.jList2.setEnabled(false);
+    this.textArea.setEnabled(false);
+    this.jComboBox1.setEnabled(false);
+    this.jComboBox2.setEnabled(false);
+    this.jComboBox3.setEnabled(false);
+    this.jLabel8.setEnabled(false);
+    this.jLabel9.setEnabled(false);
+    this.jLabel10.setEnabled(false);
+    this.jLabel3.setEnabled(false);
+    this.jLabel4.setEnabled(false);
+    this.jLabel7.setEnabled(false);
+    this.jLabel11.setEnabled(false);
     }
     
      public AfterLogin(Interface a){
         initComponents();
         setIcon();
         myAgent = a;
+        this.jButton1.setEnabled(false);
+        this.jButton2.setEnabled(false);
+        this.jButton3.setEnabled(false);
+        this.textField.setEnabled(false);
+        this.jList1.setEnabled(false);
+        this.jList2.setEnabled(false);
+        this.textArea.setEnabled(false);
+        this.jComboBox1.setEnabled(false);
+        this.jComboBox2.setEnabled(false);
+        this.jComboBox3.setEnabled(false);
+        this.jLabel8.setEnabled(false);
+        this.jLabel9.setEnabled(false);
+        this.jLabel10.setEnabled(false);
+        this.jLabel3.setEnabled(false);
+        this.jLabel4.setEnabled(false);
+        this.jLabel7.setEnabled(false);
+        this.jLabel11.setEnabled(false);
     }
 
     /**
@@ -78,6 +119,13 @@ public class AfterLogin extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,11 +133,11 @@ public class AfterLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Welcome Utilizador");
+        jLabel2.setText("Welcome to CleverE Eventos de Braga");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(320, 10, 120, 30);
+        jLabel2.setBounds(320, 10, 500, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/clever-logo.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -98,9 +146,9 @@ public class AfterLogin extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(450, 10, 190, 30);
+        jLabel5.setBounds(530, 80, 190, 30);
         getContentPane().add(textField);
-        textField.setBounds(320, 60, 270, 40);
+        textField.setBounds(300, 120, 270, 40);
 
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -110,7 +158,7 @@ public class AfterLogin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 250, 330, 200);
+        jScrollPane1.setBounds(20, 270, 230, 200);
 
         jButton1.setText("Search events");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +167,7 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(630, 60, 140, 40);
+        jButton1.setBounds(600, 120, 140, 40);
 
         jButton2.setText("Exit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +176,7 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(670, 460, 130, 30);
+        jButton2.setBounds(800, 490, 130, 30);
 
         jButton3.setText("My Events");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -137,22 +185,22 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(20, 460, 130, 30);
+        jButton3.setBounds(20, 480, 130, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Aceita Chuva?");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(320, 120, 110, 30);
+        jLabel3.setBounds(310, 170, 110, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Temperatura Mínima");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(450, 120, 130, 30);
+        jLabel4.setBounds(450, 170, 130, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Temperatura Máxima");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(590, 120, 150, 30);
+        jLabel7.setBounds(600, 170, 150, 30);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -161,28 +209,63 @@ public class AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(320, 160, 80, 20);
+        jComboBox1.setBounds(310, 210, 80, 20);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-5", "0", "5", "10", "15", "20" }));
         getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(450, 160, 80, 20);
+        jComboBox2.setBounds(450, 210, 80, 20);
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "15", "20", "25", "30", "35", "40", "45" }));
         getContentPane().add(jComboBox3);
-        jComboBox3.setBounds(590, 160, 80, 20);
+        jComboBox3.setBounds(600, 210, 80, 20);
 
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane2.setViewportView(textArea);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(390, 250, 450, 200);
+        jScrollPane2.setBounds(290, 270, 390, 200);
+
+        jScrollPane3.setViewportView(jList2);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(730, 270, 190, 200);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Lista de Eventos:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(20, 240, 190, 30);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Detalhes do Evento:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(290, 240, 190, 30);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("Agentes de Recolha de Informação");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(730, 240, 170, 30);
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Utilizador");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(310, 80, 200, 30);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/facebook-icon.png"))); // NOI18N
+        jButton4.setText("Login");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(770, 120, 140, 50);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 0, 860, 500);
+        jLabel6.setBounds(0, 0, 950, 540);
 
-        setSize(new java.awt.Dimension(878, 536));
+        setSize(new java.awt.Dimension(961, 573));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -217,7 +300,7 @@ public class AfterLogin extends javax.swing.JFrame {
         }
         myAgent.postGuiEvent(ge);
         System.out.println("ola");
-        
+        /*
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
         DefaultListModel list = new DefaultListModel();
@@ -228,7 +311,7 @@ public class AfterLogin extends javax.swing.JFrame {
            });
         }
         //this.jList1 = new JList(list);
-        this.jList1.setModel(list);
+        this.jList1.setModel(list);*/
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -256,6 +339,10 @@ public class AfterLogin extends javax.swing.JFrame {
         
     }
     
+    public void mostraOptionPane(){
+        JOptionPane.showMessageDialog(null,"Not UnderStood");
+    }
+    
     
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
@@ -263,6 +350,80 @@ public class AfterLogin extends javax.swing.JFrame {
         this.mostraEventoCompleto(selected);
         //textArea.setText(selected);
     }//GEN-LAST:event_jList1ValueChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         String domain = "http://google.com";
+        String appId = "1716266622025825";
+        
+        String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="+appId+"&redirect_uri="+domain+"&scope=user_about_me,"
+                + "user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_birthday,user_education_history,"
+                + "user_events,user_photos,user_friends,user_games_activity,user_hometown,user_likes,user_location,user_photos,user_relationship_details,"
+                + "user_relationships,user_religion_politics,user_status,user_tagged_places,user_videos,user_website,user_work_history,ads_management,ads_read,email,"
+                + "manage_pages,publish_actions,read_insights,read_page_mailboxes,rsvp_event";
+        
+        System.setProperty("webdirver.chrome.driver", "chromedriver.exe");
+        
+        WebDriver driver = new ChromeDriver();
+        driver.get(authUrl);
+        String accessToken;
+        while(true){
+        
+            if(!driver.getCurrentUrl().contains("facebook.com")){
+            String url = driver.getCurrentUrl();
+            accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+            
+            driver.quit();
+            
+            fbClient = new DefaultFacebookClient(accessToken);
+               
+                
+     try{
+            // Obtem os dados do utilizador
+            UserData userdata = new UserData(fbClient);
+            user = userdata.getUser("me");
+            Interface it = new Interface();
+            
+            //Obtem os eventos do utilizador
+            // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
+            // Parameter.with("q", "braga"), Parameter.with("type", "event"));
+            //AfterLogin al = new AfterLogin(userdata,it);
+            //al.setName(user.getName());
+            
+            
+            //al.setVisible(true);
+            this.jButton1.setEnabled(true);
+            this.jButton2.setEnabled(true);
+            this.jButton3.setEnabled(true);
+            this.textField.setEnabled(true);
+            this.jList1.setEnabled(true);
+            this.jList2.setEnabled(true);
+            this.textArea.setEnabled(true);
+            this.jComboBox1.setEnabled(true);
+            this.jComboBox2.setEnabled(true);
+            this.jComboBox3.setEnabled(true);
+            this.jLabel8.setEnabled(true);
+            this.jLabel9.setEnabled(true);
+            this.jLabel10.setEnabled(true);
+            this.jLabel3.setEnabled(true);
+            this.jLabel4.setEnabled(true);
+            this.jLabel7.setEnabled(true);
+            this.jLabel11.setEnabled(true);
+            this.jButton4.setEnabled(false);
+            this.setName(user.getName());
+            //this.dispose();
+            
+          
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+     
+     
+            }
+       
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,7 +455,8 @@ public class AfterLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AfterLogin().setVisible(true);
+                Interface interfac = new Interface();
+                new AfterLogin(interfac).setVisible(true);
             }
         });
     }
@@ -303,19 +465,26 @@ public class AfterLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea textArea;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
@@ -326,5 +495,13 @@ private void setIcon() {
 public void setName(String name){
         jLabel5.setText(name);
     }
+
+public void setFbclient(FacebookClient client){
+    this.fbClient = client;
+}
+
+public FacebookClient getFbclient(){
+    return this.fbClient;
+}
 
 }

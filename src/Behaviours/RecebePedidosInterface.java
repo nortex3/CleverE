@@ -2,6 +2,7 @@
 package Behaviours;
 
 import Agents.Controlador;
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
@@ -32,12 +33,20 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                     block();
                 }
                
-            }
+            
+            
             else {
-                //qualquer cena
+                    AID receiver = new AID();
+                    receiver.setLocalName("inter");
+                    long time = System.currentTimeMillis();
+                    ACLMessage accept = new ACLMessage(ACLMessage.NOT_UNDERSTOOD);
+                    accept.setContent("Não entendi");
+                    accept.setConversationId(""+time);
+                    accept.addReceiver(receiver);
+                    this.cont.send(accept);
             }
         }
 
+        }
     }
-    
 }

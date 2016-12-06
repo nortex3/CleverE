@@ -5,6 +5,7 @@
  */
 package Behaviours;
 import Agents.Interface;
+import GUI.AfterLogin;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -35,8 +36,11 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                         //processa a mensagem    
                         System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
                         }
-            } else {System.out.println(recebida.getSender().getLocalName() + " -> " + recebida.getContent());
-                System.out.println("Interface: Recebi mensagem que não me interessa");
+            } else if(recebida.getPerformative() == ACLMessage.NOT_UNDERSTOOD){
+                AfterLogin af = new AfterLogin();
+                af.mostraOptionPane();
+                //System.out.println(recebida.getSender().getLocalName() + " -> " + recebida.getContent());
+                //System.out.println("Interface: Recebi mensagem que não me interessa");
             }
         }
         block();
