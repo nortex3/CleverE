@@ -62,7 +62,7 @@ public class Interface extends GuiAgent {
         
         //adicionar behaviours aqui
         //this.addBehaviour(new IniciaInterface(this));
-        this.addBehaviour(new PedeListaAgentes(this));
+        //this.addBehaviour(new PedeListaAgentes(this));
         this.addBehaviour(new RecebeInfoControlador(this));
        
        

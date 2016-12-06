@@ -357,6 +357,7 @@ public class AfterLogin extends javax.swing.JFrame {
         
         for(String ss: agt[1].split(";")){
             System.out.println(ss);
+            textArea2.setEnabled(true);
             textArea2.setText(ss);
         }
         //this.jList1 = new JList(list);
