@@ -6,8 +6,12 @@
 package Behaviours;
 import Agents.Interface;
 import GUI.AfterLogin;
+import GUI.YellowPages;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
@@ -19,7 +23,7 @@ import javax.swing.DefaultListModel;
 public class RecebeInfoControlador extends CyclicBehaviour{
     
     private Interface inter;
-    //private AfterLogin aft;
+  
     
     public RecebeInfoControlador(Interface i) {
         this.inter = i;
@@ -39,10 +43,18 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                         System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
                         }
                 else if(recebida.getContent().matches("agentes:.+")){
-                    String[] agentes = recebida.getContent().split(":");
+                    System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
+                    List<String> agentes = new ArrayList<String>(Arrays.asList(recebida.getContent().split(":")));
                     //for(String ss: agentes[1].split(";")){
-                        AfterLogin aft = new AfterLogin();
-                        aft.mostraAgentes(agentes);
+                        AfterLogin af = new AfterLogin();
+                        af.setVisible(true);
+                        af.mostraAgentes(agentes);
+                  
+                     
+                        //System.out.println(agentes);
+                        //AfterLogin aft = new AfterLogin();
+                        //aft.mostraAgentes(agentes);
+                        //aft.mostra(agentes);
                         
                         
                         //System.out.println(ss);

@@ -46,6 +46,8 @@ public class Interface extends GuiAgent {
     private FacebookClient fbClient;
     // private ArrayList<String> ListaEventos;
     
+   
+    
      public Interface(){
         this.fbClient = new DefaultFacebookClient();
         // this.ListaEventos = new ArrayList<>();
@@ -98,6 +100,7 @@ public class Interface extends GuiAgent {
     public FacebookClient getFbClient(){
         return this.fbClient;
     }
+    
     
  
     
