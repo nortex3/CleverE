@@ -68,6 +68,7 @@ public class AfterLogin extends javax.swing.JFrame {
     this.jLabel4.setEnabled(false);
     this.jLabel7.setEnabled(false);
     this.jLabel11.setEnabled(false);
+   
     }
     
      public AfterLogin(Interface a){
@@ -91,6 +92,7 @@ public class AfterLogin extends javax.swing.JFrame {
         this.jLabel4.setEnabled(false);
         this.jLabel7.setEnabled(false);
         this.jLabel11.setEnabled(false);
+        
     }
 
     /**
@@ -128,8 +130,9 @@ public class AfterLogin extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("CleverE - Eventos da Cidade de Braga");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
