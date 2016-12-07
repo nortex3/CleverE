@@ -23,7 +23,7 @@ import javax.swing.DefaultListModel;
 public class RecebeInfoControlador extends CyclicBehaviour{
     
     private Interface inter;
-    //private AfterLogin aft;
+  
     
     public RecebeInfoControlador(Interface i) {
         this.inter = i;
@@ -46,9 +46,17 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                     System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
                     List<String> agentes = new ArrayList<String>(Arrays.asList(recebida.getContent().split(":")));
                     //for(String ss: agentes[1].split(";")){
+<<<<<<< HEAD
                         YellowPages yp = new YellowPages();
                         yp.setVisible(true);
                         yp.mostraAgentes(agentes);
+=======
+                        AfterLogin af = new AfterLogin();
+                        af.setVisible(true);
+                        af.mostraAgentes(agentes);
+                  
+                     
+>>>>>>> origin/master
                         //System.out.println(agentes);
                         //AfterLogin aft = new AfterLogin();
                         //aft.mostraAgentes(agentes);
