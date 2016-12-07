@@ -14,11 +14,15 @@ import com.restfb.types.Event;
 import com.restfb.types.User;
 import jade.gui.GuiEvent;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,10 +36,11 @@ public class AfterLogin extends javax.swing.JFrame {
     private UserData userdata;
     //private String[] s = null;
      private Connection<Event> eventList;
-     private Connection<Event> MyeventList;
+     private List<Event> MyeventList;
      private Interface myAgent;
      FacebookClient fbClient;
     User user;
+  
      //public JFrame frame;
      //private Interface interfa;
 
@@ -306,25 +311,30 @@ public class AfterLogin extends javax.swing.JFrame {
        // ge = new GuiEvent(mensagem,1);
        // myAgent.postGuiEvent(ge);
        
-       GuiEvent ge = new GuiEvent(mensagem,1);
+        GuiEvent ge = new GuiEvent(mensagem,1);
         System.out.println("criei o guievent");
         if(myAgent==null){
             System.out.println("agente esta nulo");
         }
         myAgent.postGuiEvent(ge);
         System.out.println("ola");
-        /*
+       
+       
+        
+        userdata = new UserData(this.getFbclient());
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
-        DefaultListModel list = new DefaultListModel();
+        DefaultListModel list;
+        list = new DefaultListModel();
+      
      
-        for(List<Event> s : MyeventList){
-              s.forEach((e) -> {
-                list.addElement(e.getName());
-           });
-        }
+        MyeventList.forEach((e) -> {
+            
+            list.addElement(e.getName());
+          
+        });
         //this.jList1 = new JList(list);
-        this.jList1.setModel(list);*/
+        this.jList1.setModel(list);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -340,17 +350,12 @@ public class AfterLogin extends javax.swing.JFrame {
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
         //DefaultListModel list = new DefaultListModel();
-     
-        for(List<Event> s : MyeventList){
-              s.forEach((e) -> {
-                if(e.getName().equals(item)){
-                    textArea.setText(e.toString());
-                }
-                //ist.addElement(e.getName());
-           });
+        MyeventList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
+            textArea.setText(e.getDescription());
+        }); //ist.addElement(e.getName());
         }
         
-    }
+    
     
     public void mostraOptionPane(){
         JOptionPane.showMessageDialog(null,"Not UnderStood");
@@ -431,7 +436,7 @@ public class AfterLogin extends javax.swing.JFrame {
             Interface it = new Interface();
             
             //Obtem os eventos do utilizador
-            // Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
+             //Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
             // Parameter.with("q", "braga"), Parameter.with("type", "event"));
             //AfterLogin al = new AfterLogin(userdata,it);
             //al.setName(user.getName());
@@ -554,4 +559,8 @@ public FacebookClient getFbclient(){
     return this.fbClient;
 }
 
+
+
 }
+
+

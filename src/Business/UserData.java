@@ -15,6 +15,9 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.Event;
 import com.restfb.types.User;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 
 //  DADOS DO UTILIZADOR
@@ -25,6 +28,8 @@ public class UserData {
     private User user;
     private Connection<Event> EventList;
      private Connection<Event> MyEventList;
+     
+     
     
     // ESTE CONSTRUTOR NAO DA; ASSSIM E NECESSARIO PASSA O FBCLIENT:
     public UserData() {
@@ -58,9 +63,27 @@ public class UserData {
         return fbclient.fetchConnection("search", Event.class,Parameter.with("q",parametro), Parameter.with("type", "event"), Parameter.with("location", "braga") );
     }
     
-    public Connection<Event> getMyEventList() {
-        return fbclient.fetchConnection("me/events", Event.class,Parameter.with("type","attending"));
-    }
+    public List<Event> getMyEventList() {
+        MyEventList = fbclient.fetchConnection("me/events/attending", Event.class);
+        List<Event> BragaList = new ArrayList<Event>();
+        for(List<Event> s : MyEventList){
+              s.forEach((Event e) -> {
+                  if(e.getPlace()!= null){
+                      if (e.getPlace().getLocation() != null){
+                          if("Braga".equals(e.getPlace().getLocation().getCity()))
+                              BragaList.add(e);
+                      }
+                  }
+              });
+        }
+        
+        return BragaList;
+        
+                
+       }
+    
+   
+    
 
     public Login getLogin() {
         return login;
