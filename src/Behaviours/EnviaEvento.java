@@ -26,7 +26,7 @@ public class EnviaEvento extends CyclicBehaviour{
     
     @Override
     public void action() {
-        String conteudo="braga";
+        String conteudo="evento:";
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         ACLMessage resp = null;
         msg.setConversationId("");
@@ -51,13 +51,13 @@ public class EnviaEvento extends CyclicBehaviour{
                     
                     System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
                     conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
-                    conteudo+=resp.getContent();
+                    conteudo +=resp.getContent();
                 }
             }
         
 
         
-        /*conteudo = conteudo.substring(0,conteudo.length()-1);
+        conteudo = conteudo.substring(0,conteudo.length()-1);
 
         ACLMessage nova = new ACLMessage(ACLMessage.INFORM);
         AID inter = new AID();
@@ -66,7 +66,7 @@ public class EnviaEvento extends CyclicBehaviour{
         nova.setConversationId("");
         nova.setContent(conteudo);
 
-        this.cont.send(nova);*/
+        this.cont.send(nova);
         
     }
 }

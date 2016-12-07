@@ -6,6 +6,7 @@
 package Behaviours;
 
 import Agents.Interface;
+import jade.core.behaviours.ParallelBehaviour;
 import jade.core.behaviours.SequentialBehaviour;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,11 +17,11 @@ import javafx.stage.Stage;
  *
  * @author Alexandre
  */
-public class IniciaInterface extends SequentialBehaviour{
+public class IniciaInterface extends ParallelBehaviour{
     private Interface i;
     
     public IniciaInterface(Interface i){
-        super(i);
+        //super(i);
         this.addSubBehaviour(new PedeEventos(i));
         this.addSubBehaviour(new RecebeInfoControlador(i));
        

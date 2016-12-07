@@ -7,6 +7,7 @@ package Behaviours;
 import Agents.Interface;
 import GUI.AfterLogin;
 import GUI.YellowPages;
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
@@ -39,8 +40,17 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                 if (recebida.getContent().matches("evento:.+")){
                     //String[] eventos = recebida.getContent().split(":");
                     //for(String ss : eventos[1].split(";"))
-                        //processa a mensagem    
-                        System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
+                        //processa a mensagem 
+                        
+                    AID receiver = new AID();
+                    receiver.setLocalName("controlador");
+                    long time = System.currentTimeMillis();
+                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    accept.setContent("recebi");
+                    accept.setConversationId(""+time);
+                    accept.addReceiver(receiver);
+                    this.inter.send(accept);
+                    System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
                         }
                 else if(recebida.getContent().matches("agentes:.+")){
                     System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
@@ -53,6 +63,15 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                         //AfterLogin aft = new AfterLogin();
                         //aft.mostraAgentes(agentes);
                         //aft.mostra(agentes);
+                        
+                    AID receiver = new AID();
+                    receiver.setLocalName("controlador");
+                    long time = System.currentTimeMillis();
+                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    accept.setContent("recebi");
+                    accept.setConversationId(""+time);
+                    accept.addReceiver(receiver);
+                    this.inter.send(accept);
                         
                         
                         //System.out.println(ss);
