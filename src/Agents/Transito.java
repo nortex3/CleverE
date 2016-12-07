@@ -6,14 +6,16 @@
 package Agents;
 
 import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
+import jade.lang.acl.ACLMessage;
 
 /**
  *
- * @author Miguel
+ * @author Miguel/alexandre/Nuno 
  */
 public class Transito extends Agent{
     
@@ -35,6 +37,7 @@ public class Transito extends Agent{
         }
         
         System.out.println("Agente " + this.getLocalName() + " a iniciar...");
+        this.addBehaviour(new ReceiveBehaviour());
     }
     
      protected void takeDown(){
@@ -48,5 +51,30 @@ public class Transito extends Agent{
         System.out.println(this.getLocalName()+" a morrer...");
     }
     
+      private class ReceiveBehaviour extends CyclicBehaviour {
+
+        @Override
+        public void action() {
+            ACLMessage msg = receive();
+            String str="";
+            if (msg != null) {
+                ACLMessage reply = msg.createReply();
+                
+                if (msg.getPerformative() == ACLMessage.REQUEST) {
+                    if (msg.getContent().equals("evento: ")) {
+                        
+                        str+="RECEBI O PEDIDO DO CONTROLADOR,,,,TRANSITO";
+                        reply.setContent(str);
+                        reply.setPerformative(ACLMessage.INFORM);
+                        myAgent.send(reply);
+                        }
+                } else {
+                    reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
+                    myAgent.send(reply);
+                }
+            }
+            block();
+        }
+    }
     
 }

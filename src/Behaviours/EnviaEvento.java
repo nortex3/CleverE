@@ -51,11 +51,56 @@ public class EnviaEvento extends CyclicBehaviour{
                     
                     System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
                     conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
-                    conteudo +=resp.getContent();
                 }
             }
-        
+        if (resp != null && resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==eventos) {
+                if(resp.getContent()!= null) {
+                   
+                    System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
+                    conteudo += resp.getContent();
+                   
+                }
+            }
 
+        
+        
+        String conteudo2="evento: ";
+        ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
+        msg.setConversationId("");
+        msg2.setContent(conteudo2);
+        AID tempo = new AID();
+        tempo.setLocalName("tempo");
+        msg2.addReceiver(tempo);
+        this.cont.send(msg2);
+        
+            if ( resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==tempo) {
+                
+                if(resp.getContent()!= null) {
+                    //System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+resp.getContent());
+                    System.out.println("meteoxxxxxxxxxx"+resp.getContent()+resp.getSender());
+                    
+                   
+                }
+            }
+            
+            
+        String conteudo3="evento: ";
+        ACLMessage msg3 = new ACLMessage(ACLMessage.REQUEST);
+        msg.setConversationId("");
+        msg3.setContent(conteudo3);
+        AID transito = new AID();
+        transito.setLocalName("transito");
+        msg3.addReceiver(transito);
+        this.cont.send(msg3);
+        
+            if ( resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==transito) {
+               
+                if(resp.getContent()!= null) {
+                    //System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+resp.getContent());
+                    System.out.println("tansitoxxxxxxxxx"+resp.getContent()+resp.getSender());
+                   
+                }
+            }
         
         conteudo = conteudo.substring(0,conteudo.length()-1);
 
