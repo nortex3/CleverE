@@ -30,6 +30,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class AfterLogin extends javax.swing.JFrame {
     
     private UserData userdata;
+    //private String[] s = null;
      private Connection<Event> eventList;
      private Connection<Event> MyeventList;
      private Interface myAgent;
@@ -44,7 +45,7 @@ public class AfterLogin extends javax.swing.JFrame {
     public AfterLogin() {
         initComponents();
         setIcon();
-        this.textArea2.setEnabled(true);
+        //this.textArea2.setEnabled(false);
     }
     
     public AfterLogin(UserData ud,Interface i){
@@ -52,6 +53,7 @@ public class AfterLogin extends javax.swing.JFrame {
     setIcon();
     this.userdata = ud;
     this.myAgent = i;
+    
     this.jButton1.setEnabled(false);
     this.jButton2.setEnabled(false);
     this.jButton3.setEnabled(false);
@@ -70,12 +72,15 @@ public class AfterLogin extends javax.swing.JFrame {
     this.jLabel7.setEnabled(false);
     this.jLabel11.setEnabled(false);
     
+   
+    //this.mostraAgentes(null);
     }
     
      public AfterLogin(Interface a){
         initComponents();
         setIcon();
         myAgent = a;
+        
         this.jButton1.setEnabled(false);
         this.jButton2.setEnabled(false);
         this.jButton3.setEnabled(false);
@@ -93,6 +98,8 @@ public class AfterLogin extends javax.swing.JFrame {
         this.jLabel4.setEnabled(false);
         this.jLabel7.setEnabled(false);
         this.jLabel11.setEnabled(false);
+        
+        //this.mostraAgentes(null);
         
     }
 
@@ -347,21 +354,28 @@ public class AfterLogin extends javax.swing.JFrame {
     
     public void mostraOptionPane(){
         JOptionPane.showMessageDialog(null,"Not UnderStood");
+        //textArea2.setText("NOT UNDERSTOOD");
     }
-    
-    
-    public void mostraAgentes(String[] agt){
+    /*
+    public void mostra(){
+        this.textArea2.setText("Eventos, Tempo e Trânsito");
+    }
+    */
+    public void mostraAgentes(List<String> agt){
         //DefaultListModel l = new DefaultListModel();
         System.out.println("ESTOU NULO");
+        System.out.println(agt.size());
+        DefaultListModel list = new DefaultListModel();
         
-        
-        for(String ss: agt[1].split(";")){
+        for(String ss: agt){
             System.out.println(ss);
-            textArea2.setEnabled(true);
-            textArea2.setText(ss);
+            
+            list.addElement(ss);
+            //textArea2.setEnabled(true);
+            //this.textArea2.setText(ss);
         }
         //this.jList1 = new JList(list);
-        //this.jList2.setModel(l);
+        this.jList1.setModel(list);
     }
     
     /*
@@ -371,7 +385,10 @@ public class AfterLogin extends javax.swing.JFrame {
         
         
     }*/
-    
+    /*
+    public void mostra(String s){
+        this.textArea2.setText("OLA");
+    }*/
     
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
@@ -421,13 +438,14 @@ public class AfterLogin extends javax.swing.JFrame {
             
             
             //al.setVisible(true);
+            
             this.jButton1.setEnabled(true);
             this.jButton2.setEnabled(true);
             this.jButton3.setEnabled(true);
             this.textField.setEnabled(true);
             this.jList1.setEnabled(true);
             this.textArea.setEnabled(true);
-            this.textArea.setEnabled(true);
+            this.textArea2.setEnabled(true);
             this.jComboBox1.setEnabled(true);
             this.jComboBox2.setEnabled(true);
             this.jComboBox3.setEnabled(true);
@@ -438,8 +456,11 @@ public class AfterLogin extends javax.swing.JFrame {
             this.jLabel4.setEnabled(true);
             this.jLabel7.setEnabled(true);
             this.jLabel11.setEnabled(true);
+            
             this.jButton4.setEnabled(false);
             this.setName(user.getName());
+            //this.textArea2.setText("OLA");
+            
             //this.dispose();
             
           
