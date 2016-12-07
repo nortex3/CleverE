@@ -5,10 +5,7 @@
  */
 package GUI;
 
-<<<<<<< HEAD
 import java.awt.Toolkit;
-=======
->>>>>>> origin/master
 import java.util.List;
 
 /**
@@ -22,14 +19,9 @@ public class YellowPages extends javax.swing.JFrame {
      */
     public YellowPages() {
         initComponents();
-<<<<<<< HEAD
         setIcon();
     }
     
-=======
-    }
-
->>>>>>> origin/master
     public void mostraAgentes(List<String> agt){
         //DefaultListModel l = new DefaultListModel();
         System.out.println("ESTOU NULO");
@@ -42,11 +34,7 @@ public class YellowPages extends javax.swing.JFrame {
             System.out.println("Pus" + ss);
         }
      }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/master
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +46,6 @@ public class YellowPages extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-<<<<<<< HEAD
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,16 +56,11 @@ public class YellowPages extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CleverE - Eventos da Cidade de Braga");
         getContentPane().setLayout(null);
-=======
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
->>>>>>> origin/master
 
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-<<<<<<< HEAD
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(40, 70, 190, 210);
 
@@ -122,28 +104,6 @@ public class YellowPages extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-=======
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
->>>>>>> origin/master
     /**
      * @param args the command line arguments
      */
@@ -180,7 +140,6 @@ public class YellowPages extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -195,9 +154,4 @@ private void setIcon() {
  }
 
 
-=======
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea textArea;
-    // End of variables declaration//GEN-END:variables
->>>>>>> origin/master
 }

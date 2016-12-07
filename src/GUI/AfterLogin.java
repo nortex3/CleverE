@@ -53,11 +53,7 @@ public class AfterLogin extends javax.swing.JFrame {
     setIcon();
     this.userdata = ud;
     this.myAgent = i;
-<<<<<<< HEAD
     
-=======
-    /*
->>>>>>> origin/master
     this.jButton1.setEnabled(false);
     this.jButton2.setEnabled(false);
     this.jButton3.setEnabled(false);
@@ -76,11 +72,7 @@ public class AfterLogin extends javax.swing.JFrame {
     this.jLabel7.setEnabled(false);
     this.jLabel11.setEnabled(false);
     
-<<<<<<< HEAD
    
-=======
-    */
->>>>>>> origin/master
     //this.mostraAgentes(null);
     }
     
@@ -88,11 +80,7 @@ public class AfterLogin extends javax.swing.JFrame {
         initComponents();
         setIcon();
         myAgent = a;
-<<<<<<< HEAD
         
-=======
-        /*
->>>>>>> origin/master
         this.jButton1.setEnabled(false);
         this.jButton2.setEnabled(false);
         this.jButton3.setEnabled(false);
@@ -110,8 +98,6 @@ public class AfterLogin extends javax.swing.JFrame {
         this.jLabel4.setEnabled(false);
         this.jLabel7.setEnabled(false);
         this.jLabel11.setEnabled(false);
-        */
-        //this.mostraAgentes(null);
         
         //this.mostraAgentes(null);
         
@@ -376,7 +362,6 @@ public class AfterLogin extends javax.swing.JFrame {
     }
     */
     public void mostraAgentes(List<String> agt){
-<<<<<<< HEAD
         //DefaultListModel l = new DefaultListModel();
         System.out.println("ESTOU NULO");
         System.out.println(agt.size());
@@ -391,18 +376,6 @@ public class AfterLogin extends javax.swing.JFrame {
         }
         //this.jList1 = new JList(list);
         this.jList1.setModel(list);
-=======
-         System.out.println("ESTOU NULO");
-        
-        
-        for(String ss: agt){
-            System.out.println(ss);
-            textArea2.setEnabled(true);
-            textArea2.setText(ss);
-           //this.dispose();
-            System.out.println("Pus " + ss);
-        }
->>>>>>> origin/master
     }
     
     /*
