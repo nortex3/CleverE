@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Iterator;
 import javax.xml.bind.JAXBException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -92,21 +91,11 @@ public class UserWeather {
         br.close();
         inStream.close();
         JSONObject obj = new JSONObject(output);
-                
-        JSONArray arrRes = obj.getJSONArray("results");
-        Iterator<Object> iterator = arrRes.iterator();
-        StringBuilder sb = new StringBuilder();
-        while (iterator.hasNext()) {
-                sb.append(iterator.next());
-        }
-        JSONObject results = new JSONObject(sb.toString());
-        
         JSONArray arrRes = obj.getJSONObject("query").getJSONObject("results").getJSONArray("place");
-        System.out.println(arrRes.getJSONObject(0).getInt("woeid"));
+        Integer woeid = arrRes.getJSONObject(0).getInt("woeid");
+        output = woeid.toString();       
         
-        
-        return output;
-        
+        return output;        
     }
 
     public YahooWeatherService getService() {

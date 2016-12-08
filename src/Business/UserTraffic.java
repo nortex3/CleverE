@@ -13,7 +13,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -58,7 +57,6 @@ public class UserTraffic {
         JSONArray res = obj.getJSONArray("resourceSets").getJSONObject(0).getJSONArray("resources");
         
         for (int i = 0; i < res.length(); i++) {
-            
             acidente ac = new acidente(res.getJSONObject(i).getInt("severity"), res.getJSONObject(i).getString("description"));
             acidentes.add(ac);
         }
