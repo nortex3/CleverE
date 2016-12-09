@@ -23,17 +23,17 @@ import java.util.function.Consumer;
 //  DADOS DO UTILIZADOR
 public class UserData {
     
-    Login login = new Login();
-    private FacebookClient fbclient = new DefaultFacebookClient();
+  
+    public static FacebookClient fbclient = new DefaultFacebookClient();
     private User user;
     private Connection<Event> EventList;
-     private Connection<Event> MyEventList;
+    private Connection<Event> MyEventList;
      
      
     
     // ESTE CONSTRUTOR NAO DA; ASSSIM E NECESSARIO PASSA O FBCLIENT:
     public UserData() {
-        this.fbclient = login.getFbclient();
+        
         this.user = fbclient.fetchObject("me",User.class);
     }
     
@@ -43,7 +43,7 @@ public class UserData {
     }
     
 
-    public FacebookClient getFbclient() {
+    public static FacebookClient getFbclient() {
         return fbclient;
     }
 
@@ -81,17 +81,7 @@ public class UserData {
         
                 
        }
-    
-   
-    
-
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
+  
 
     public void setEventList(Connection<Event> EventList) {
         this.EventList = EventList;

@@ -5,6 +5,10 @@
  */
 package Agents;
 import Business.UserData;
+import GUI.AfterLogin;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.Facebook;
+import com.restfb.FacebookClient;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
@@ -18,6 +22,11 @@ import jade.lang.acl.ACLMessage;
  */
 public class Eventos extends Agent{
     
+  
+    
+    
+    UserData user = new UserData(AfterLogin.getFbclient());
+    
      protected void setup() {
         super.setup();
         
@@ -26,6 +35,7 @@ public class Eventos extends Agent{
         ServiceDescription sd = new ServiceDescription();
         sd.setName(getLocalName());
         
+       
         sd.setType("agentes");
         dfs.addServices(sd);
         
@@ -51,6 +61,7 @@ public class Eventos extends Agent{
         }
         System.out.println(this.getLocalName()+" a morrer...");
     }
+    
 
     private class ReceiveBehaviour extends CyclicBehaviour {
 
@@ -63,10 +74,11 @@ public class Eventos extends Agent{
                 
                 if (msg.getPerformative() == ACLMessage.REQUEST) {
                     if (msg.getContent().equals("braga")) {
-                        //UserData userdata = new UserData();
-
-                        //str+=userdata.getFbclient(); 
-                        str+="RECEBI O PEDIDO DO CONTROLADOR ->>> A enviar evento: EVENTO BRAGA ";
+                        
+                        if(user==null) System.out.println("user ta NULL");
+                        str+=user.getMyEventList(); 
+                        //System.out.println("deu");
+                        //str+="RECEBI O PEDIDO DO CONTROLADOR ->>> A enviar evento: EVENTO BRAGA ";
                         //str+=//gets
                         reply.setContent(str);
                         reply.setPerformative(ACLMessage.INFORM);

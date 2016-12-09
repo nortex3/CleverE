@@ -25,22 +25,25 @@ public class RecebePedidosInterface extends CyclicBehaviour {
         //}
         if(mensagem != null){
             if(mensagem.getPerformative() == ACLMessage.REQUEST){
-                
-                if(mensagem.getContent().equals("braga")){
-                    System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
-                    String mens=mensagem.getContent();
-                    new EnviaEvento(this.cont,mens).action();
-                    block();
-                }
-                
-             
-               
-            
-            
-            else if(mensagem.getContent().equals("daAgentes")){
+                if(mensagem.getContent().equals("daAgentes")){
                     new DaAgentesBehaviour(this.cont).action();
                     block();
-            }
+                    if(mensagem.getContent().equals("braga")){
+                        System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
+                        String mens=mensagem.getContent();
+                        new EnviaEvento(this.cont,mens).action();
+                        block();
+                    } else{
+                        AID receiver = new AID();
+                        receiver.setLocalName("inter");
+                        long time = System.currentTimeMillis();
+                        ACLMessage accept = new ACLMessage(ACLMessage.NOT_UNDERSTOOD);
+                        accept.setContent("Não entendi");
+                        accept.setConversationId(""+time);
+                        accept.addReceiver(receiver);
+                        this.cont.send(accept);
+                    }
+                }
             else{
                     AID receiver = new AID();
                     receiver.setLocalName("inter");

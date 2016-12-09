@@ -6,6 +6,7 @@
 package Behaviours;
 import Agents.Interface;
 import GUI.AfterLogin;
+import GUI.ListaEventos;
 import GUI.YellowPages;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -37,8 +38,13 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         
         if (recebida != null) {
             if (recebida.getPerformative() == ACLMessage.INFORM) {
-                if (recebida.getContent().matches("evento:.+")){
-                    List<String> eventos = new ArrayList<String>(Arrays.asList(recebida.getContent().split(":")));
+                //if (recebida.getContent().matches("evento:*")){
+                    System.out.println("ENTREI");
+                    List<String> eventos = new ArrayList<String>(Arrays.asList(recebida.getContent().split("\n")));
+                    ListaEventos le = new ListaEventos();
+                    le.setVisible(true);
+                    le.mostraEventos(eventos);
+                   
                     //for(String ss : eventos[1].split(";"))
                         //processa a mensagem 
                         
@@ -51,8 +57,8 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                     accept.addReceiver(receiver);
                     this.inter.send(accept);
                     System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
-                        }
-                else if(recebida.getContent().matches("agentes:.+")){
+                        //}
+                 if(recebida.getContent().matches("agentes:.+")){
                     System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
                     List<String> agentes = new ArrayList<String>(Arrays.asList(recebida.getContent().split(":")));
                     //for(String ss: agentes[1].split(";")){
@@ -64,10 +70,10 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                         //aft.mostraAgentes(agentes);
                         //aft.mostra(agentes);
                         
-                    AID receiver = new AID();
-                    receiver.setLocalName("controlador");
-                    long time = System.currentTimeMillis();
-                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    AID receiver2 = new AID();
+                    receiver2.setLocalName("controlador");
+                    //long time = System.currentTimeMillis();
+                    ACLMessage accept2 = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
                     accept.setContent("recebi");
                     accept.setConversationId(""+time);
                     accept.addReceiver(receiver);

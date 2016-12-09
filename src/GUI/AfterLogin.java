@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Agents.Eventos;
 import Agents.Interface;
 import Business.UserData;
 import com.restfb.Connection;
@@ -31,15 +32,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author pedro/alexandre
  */
-public class AfterLogin extends javax.swing.JFrame {
+public class  AfterLogin extends javax.swing.JFrame {
     
     private UserData userdata;
     //private String[] s = null;
      private Connection<Event> eventList;
      private List<Event> MyeventList;
      private Interface myAgent;
-     FacebookClient fbClient;
-    User user;
+     public static FacebookClient fbClient;
+     User user;
   
      //public JFrame frame;
      //private Interface interfa;
@@ -321,7 +322,9 @@ public class AfterLogin extends javax.swing.JFrame {
        
        
         
-        userdata = new UserData(this.getFbclient());
+        userdata = new UserData(getFbclient());
+        
+
         MyeventList = userdata.getMyEventList();
         //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
         DefaultListModel list;
@@ -555,8 +558,8 @@ public void setFbclient(FacebookClient client){
     this.fbClient = client;
 }
 
-public FacebookClient getFbclient(){
-    return this.fbClient;
+public static FacebookClient getFbclient(){
+    return fbClient;
 }
 
 

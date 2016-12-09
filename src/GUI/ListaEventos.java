@@ -6,6 +6,8 @@
 package GUI;
 
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -20,6 +22,22 @@ public class ListaEventos extends javax.swing.JFrame {
         initComponents();
         setIcon();
     }
+    
+    
+    public void mostraEventos(List<String> eve){
+        System.out.println(eve.size());
+        DefaultListModel list = new DefaultListModel();
+        
+        for(String ss: eve){
+            System.out.println(ss);
+            
+            list.addElement(ss);
+            //textArea2.setEnabled(true);
+            //this.textArea2.setText(ss);
+        }
+        //this.jList1 = new JList(list);
+        this.jList1.setModel(list);
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
