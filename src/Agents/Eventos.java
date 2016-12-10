@@ -91,6 +91,8 @@ public class Eventos extends Agent{
                             //str+=//gets
                             reply.setPerformative(ACLMessage.INFORM);
                             reply.setContentObject((Serializable) listaEventos);
+                            System.out.println("qualquer coisa");
+                            System.out.println(listaEventos);
                         } catch (IOException ex) {
                             //Logger.getLogger(Eventos.class.getName()).log(Level.SEVERE, null, ex);
                             System.out.println("nao deu zzzz");

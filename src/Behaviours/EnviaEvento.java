@@ -5,11 +5,18 @@
  */
 package Behaviours;
 import Agents.Controlador;
+import com.restfb.types.Event;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author NMVC
@@ -28,7 +35,8 @@ public class EnviaEvento extends CyclicBehaviour{
     public void action() {
         String conteudo="evento:";
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-        ACLMessage resp = null;
+        ACLMessage resp;
+        List<Event> eventosLista = new ArrayList<>();
         msg.setConversationId("");
         msg.setContent(this.mens);
         AID eventos = new AID();
@@ -37,9 +45,10 @@ public class EnviaEvento extends CyclicBehaviour{
         
         this.cont.send(msg);
  
-            resp = this.cont.blockingReceive(3000);
-            if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
-                if(resp.getContent()!= null) {
+        resp = this.cont.blockingReceive(3000);
+        if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+            try {
+                if(resp.getContentObject() != null) {
                     AID receiver = new AID();
                     receiver.setLocalName("eventos");
                     long time = System.currentTimeMillis();
@@ -49,18 +58,26 @@ public class EnviaEvento extends CyclicBehaviour{
                     accept.addReceiver(receiver);
                     this.cont.send(accept);
                     
-                    System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
-                    conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";
+                    eventosLista = (List<Event>) resp.getContentObject();
+                    /*System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
+                    conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";*/
                 }
+            } catch (UnreadableException ex) {
+                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         if (resp != null && resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==eventos) {
-                if(resp.getContent()!= null) {
+            try {
+                if(resp.getContentObject() != null) {
                    
                     System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
-                    conteudo += resp.getContent();
+                    eventosLista = (List<Event>) resp.getContentObject();
                    
                 }
+            } catch (UnreadableException ex) {
+                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
 
         
         
@@ -109,7 +126,11 @@ public class EnviaEvento extends CyclicBehaviour{
         inter.setLocalName("inter");
         nova.addReceiver(inter);
         nova.setConversationId("");
-        nova.setContent(conteudo);
+        try {
+            nova.setContentObject((Serializable) eventosLista);
+        } catch (IOException ex) {
+            Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         this.cont.send(nova);
         
