@@ -9,6 +9,7 @@ import GUI.AfterLogin;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.Facebook;
 import com.restfb.FacebookClient;
+import com.restfb.types.Event;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
@@ -16,6 +17,12 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Miguel
@@ -26,6 +33,7 @@ public class Eventos extends Agent{
     
     
     UserData user = new UserData(AfterLogin.getFbclient());
+    List <Event> listaEventos = new ArrayList<Event>();
     
      protected void setup() {
         super.setup();
@@ -76,12 +84,18 @@ public class Eventos extends Agent{
                     if (msg.getContent().equals("braga")) {
                         
                         if(user==null) System.out.println("user ta NULL");
-                        str+=user.getMyEventList(); 
-                        //System.out.println("deu");
-                        //str+="RECEBI O PEDIDO DO CONTROLADOR ->>> A enviar evento: EVENTO BRAGA ";
-                        //str+=//gets
-                        reply.setContent(str);
-                        reply.setPerformative(ACLMessage.INFORM);
+                        listaEventos=user.getMyEventList(); 
+                        try {
+                            //System.out.println("deu");
+                            //str+="RECEBI O PEDIDO DO CONTROLADOR ->>> A enviar evento: EVENTO BRAGA ";
+                            //str+=//gets
+                            reply.setPerformative(ACLMessage.INFORM);
+                            reply.setContentObject((Serializable) listaEventos);
+                        } catch (IOException ex) {
+                            //Logger.getLogger(Eventos.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("nao deu zzzz");
+                        }
+                        
                         myAgent.send(reply);
                         }
                 } else if(msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL){
