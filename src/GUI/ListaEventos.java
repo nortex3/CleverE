@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import com.restfb.types.Event;
 import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -24,14 +25,14 @@ public class ListaEventos extends javax.swing.JFrame {
     }
     
     
-    public void mostraEventos(List<String> eve){
+    public void mostraEventos(List<Event> eve){
         System.out.println(eve.size());
         DefaultListModel list = new DefaultListModel();
         
-        for(String ss: eve){
+        for(Event ss: eve){
             System.out.println(ss);
             
-            list.addElement(ss);
+            list.addElement(ss.getName());
             //textArea2.setEnabled(true);
             //this.textArea2.setText(ss);
         }
