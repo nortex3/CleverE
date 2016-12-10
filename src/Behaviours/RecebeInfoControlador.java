@@ -8,12 +8,16 @@ import Agents.Interface;
 import GUI.AfterLogin;
 import GUI.ListaEventos;
 import GUI.YellowPages;
+import com.restfb.types.Event;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -37,13 +41,20 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         ACLMessage recebida = this.inter.receive();
         
         if (recebida != null) {
+            Object eventos = new ArrayList<Event>();
             if (recebida.getPerformative() == ACLMessage.INFORM) {
                 //if (recebida.getContent().matches("evento:*")){
                     System.out.println("ENTREI");
-                    List<String> eventos = new ArrayList<String>(Arrays.asList(recebida.getContent().split("\n")));
+                   
+                try {
+                    eventos =  recebida.getContentObject();
+                    System.out.println("XXXXXXXXXXX\n" + eventos.toString());
+                } catch (UnreadableException ex) {
+                    Logger.getLogger(RecebeInfoControlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
                     ListaEventos le = new ListaEventos();
                     le.setVisible(true);
-                    le.mostraEventos(eventos);
+                    le.mostraEventos((List<Event>) eventos);
                    
                     //for(String ss : eventos[1].split(";"))
                         //processa a mensagem 
