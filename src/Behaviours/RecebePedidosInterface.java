@@ -28,7 +28,8 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                 if(mensagem.getContent().equals("daAgentes")){
                     new DaAgentesBehaviour(this.cont).action();
                     block();
-                    if(mensagem.getContent().equals("braga")){
+                }
+                 else if(mensagem.getContent().equals("braga")){
                         System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
                         String mens=mensagem.getContent();
                         new EnviaEvento(this.cont,mens).action();
@@ -44,7 +45,7 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                         this.cont.send(accept);
                     }
                 }
-            else{
+            /*else{
                     AID receiver = new AID();
                     receiver.setLocalName("inter");
                     long time = System.currentTimeMillis();
@@ -53,8 +54,8 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                     accept.setConversationId(""+time);
                     accept.addReceiver(receiver);
                     this.cont.send(accept);
-            }
-        }
+            }*/
+        
 
         }
     }
