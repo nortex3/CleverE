@@ -64,15 +64,9 @@ public class  AfterLogin extends javax.swing.JFrame {
     this.jButton2.setEnabled(false);
     this.jButton3.setEnabled(false);
     this.textField.setEnabled(false);
-    this.jList1.setEnabled(false);
-    this.textArea2.setEnabled(false);
-    this.textArea.setEnabled(false);
     this.jComboBox1.setEnabled(false);
     this.jComboBox2.setEnabled(false);
     this.jComboBox3.setEnabled(false);
-    this.jLabel8.setEnabled(false);
-    this.jLabel9.setEnabled(false);
-    this.jLabel10.setEnabled(false);
     this.jLabel3.setEnabled(false);
     this.jLabel4.setEnabled(false);
     this.jLabel7.setEnabled(false);
@@ -91,15 +85,9 @@ public class  AfterLogin extends javax.swing.JFrame {
         this.jButton2.setEnabled(false);
         this.jButton3.setEnabled(false);
         this.textField.setEnabled(false);
-        this.jList1.setEnabled(false);
-        this.textArea2.setEnabled(false);
-        this.textArea.setEnabled(false);
         this.jComboBox1.setEnabled(false);
         this.jComboBox2.setEnabled(false);
         this.jComboBox3.setEnabled(false);
-        this.jLabel8.setEnabled(false);
-        this.jLabel9.setEnabled(false);
-        this.jLabel10.setEnabled(false);
         this.jLabel3.setEnabled(false);
         this.jLabel4.setEnabled(false);
         this.jLabel7.setEnabled(false);
@@ -122,8 +110,6 @@ public class  AfterLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         textField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -133,15 +119,8 @@ public class  AfterLogin extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textArea = new javax.swing.JTextArea();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        textArea2 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -165,17 +144,7 @@ public class  AfterLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(530, 80, 190, 30);
         getContentPane().add(textField);
-        textField.setBounds(300, 120, 270, 40);
-
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 270, 230, 200);
+        textField.setBounds(20, 300, 270, 40);
 
         jButton1.setText("Search events");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +153,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(600, 120, 140, 40);
+        jButton1.setBounds(770, 90, 140, 40);
 
         jButton2.setText("Exit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +171,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(20, 480, 130, 30);
+        jButton3.setBounds(20, 350, 130, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Aceita Chuva?");
@@ -236,28 +205,6 @@ public class  AfterLogin extends javax.swing.JFrame {
         getContentPane().add(jComboBox3);
         jComboBox3.setBounds(600, 210, 80, 20);
 
-        textArea.setColumns(20);
-        textArea.setRows(5);
-        jScrollPane2.setViewportView(textArea);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(290, 270, 390, 200);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("Lista de Eventos:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(20, 240, 190, 30);
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setText("Detalhes do Evento:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(290, 240, 190, 30);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setText("Agentes de Recolha de Informação");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(730, 240, 210, 30);
-
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Utilizador");
         getContentPane().add(jLabel11);
@@ -271,14 +218,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(770, 120, 140, 50);
-
-        textArea2.setColumns(20);
-        textArea2.setRows(5);
-        jScrollPane4.setViewportView(textArea2);
-
-        getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(720, 270, 220, 200);
+        jButton4.setBounds(390, 430, 160, 70);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -301,7 +241,7 @@ public class  AfterLogin extends javax.swing.JFrame {
            });
         }
         //this.jList1 = new JList(list);
-        this.jList1.setModel(list);
+        //this.jList1.setModel(list);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -337,7 +277,7 @@ public class  AfterLogin extends javax.swing.JFrame {
           
         });
         //this.jList1 = new JList(list);
-        this.jList1.setModel(list);
+        //this.jList1.setModel(list);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -347,7 +287,7 @@ public class  AfterLogin extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    /*
     private void mostraEventoCompleto(String item){
         
         MyeventList = userdata.getMyEventList();
@@ -356,7 +296,7 @@ public class  AfterLogin extends javax.swing.JFrame {
         MyeventList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
             textArea.setText(e.getDescription());
         }); //ist.addElement(e.getName());
-        }
+        }*/
         
     
     
@@ -383,28 +323,9 @@ public class  AfterLogin extends javax.swing.JFrame {
             //this.textArea2.setText(ss);
         }
         //this.jList1 = new JList(list);
-        this.jList1.setModel(list);
+        //this.jList1.setModel(list);
     }
     
-    /*
-    public void mostraAgentes(String ss){
-        
-        textArea.setText(ss);
-        
-        
-    }*/
-    /*
-    public void mostra(String s){
-        this.textArea2.setText("OLA");
-    }*/
-    
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        // TODO add your handling code here:
-        String selected = jList1.getSelectedValue().toString();
-        this.mostraEventoCompleto(selected);
-        //textArea.setText(selected);
-    }//GEN-LAST:event_jList1ValueChanged
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
          String domain = "http://google.com";
@@ -451,15 +372,9 @@ public class  AfterLogin extends javax.swing.JFrame {
             this.jButton2.setEnabled(true);
             this.jButton3.setEnabled(true);
             this.textField.setEnabled(true);
-            this.jList1.setEnabled(true);
-            this.textArea.setEnabled(true);
-            this.textArea2.setEnabled(true);
             this.jComboBox1.setEnabled(true);
             this.jComboBox2.setEnabled(true);
             this.jComboBox3.setEnabled(true);
-            this.jLabel8.setEnabled(true);
-            this.jLabel9.setEnabled(true);
-            this.jLabel10.setEnabled(true);
             this.jLabel3.setEnabled(true);
             this.jLabel4.setEnabled(true);
             this.jLabel7.setEnabled(true);
@@ -528,7 +443,6 @@ public class  AfterLogin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -536,14 +450,6 @@ public class  AfterLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea textArea;
-    private javax.swing.JTextArea textArea2;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 private void setIcon() {

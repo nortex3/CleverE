@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import Business.UserData;
 import com.restfb.types.Event;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 
@@ -16,6 +18,9 @@ import javax.swing.DefaultListModel;
  */
 public class ListaEventos extends javax.swing.JFrame {
 
+    private List<Event> myList;
+    //private UserData userdata;
+    
     /**
      * Creates new form ListaEventos
      */
@@ -23,12 +28,32 @@ public class ListaEventos extends javax.swing.JFrame {
         initComponents();
         setIcon();
     }
+
+    public ListaEventos(List<Event> ml) {
+        this.myList = ml;
+    }
+
+    public List<Event> getMyeventList() {
+        List<Event> aux = new ArrayList<Event>();
+        for(Event e: this.myList){
+            aux.add(e);
+        }
+        
+        return aux;
+    }
+
+    public void setMyeventList(List<Event> MyeventList) {
+        this.myList = MyeventList;
+        System.out.println("ESTOU NO SET");
+        System.out.println(this.myList);
+    }
+    
     
     
     public void mostraEventos(List<Event> eve){
         System.out.println(eve.size());
         DefaultListModel list = new DefaultListModel();
-        
+        this.setMyeventList(eve);
         for(Event ss: eve){
             System.out.println(ss);
             
@@ -39,6 +64,21 @@ public class ListaEventos extends javax.swing.JFrame {
         //this.jList1 = new JList(list);
         this.jList1.setModel(list);
      }
+    
+    
+    
+    
+     private void mostraEventoCompleto(String item){
+        
+         myList = this.getMyeventList();
+         
+        //MyeventList = userdata.getMyEventList();
+        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
+        //DefaultListModel list = new DefaultListModel();
+        myList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
+            textArea.setText(e.getDescription());
+        }); //ist.addElement(e.getName());
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +92,7 @@ public class ListaEventos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,14 +106,19 @@ public class ListaEventos extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 180, 190, 150);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane2.setViewportView(textArea);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(240, 180, 300, 150);
@@ -125,6 +170,12 @@ public class ListaEventos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        String selected = jList1.getSelectedValue().toString();
+        this.mostraEventoCompleto(selected);
+    }//GEN-LAST:event_jList1ValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -171,7 +222,7 @@ public class ListaEventos extends javax.swing.JFrame {
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever_icon.png")));
