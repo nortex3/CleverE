@@ -12,6 +12,45 @@ import jade.core.Agent;
 
 public class Controlador extends Agent {
     
+    private String chuva;
+    private String mensagem;
+    private String tempMin;
+    private String tempMax;
+
+    public String getChuva() {
+        return chuva;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public String getTempMin() {
+        return tempMin;
+    }
+
+    public String getTempMax() {
+        return tempMax;
+    }
+
+    public void setChuva(String chuva) {
+        this.chuva = chuva;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public void setTempMin(String tempMin) {
+        this.tempMin = tempMin;
+    }
+
+    public void setTempMax(String tempMax) {
+        this.tempMax = tempMax;
+    }
+    
+    
+    
     @Override
     protected void setup() {
         

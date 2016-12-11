@@ -24,8 +24,12 @@ import jade.core.Agent;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
@@ -80,6 +84,7 @@ public class Interface extends GuiAgent {
             long time = System.currentTimeMillis();
             ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
             msg.setContent(content);
+            
             msg.setConversationId(""+time);
             msg.addReceiver(receiver);
             send(msg);

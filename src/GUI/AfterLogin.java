@@ -8,6 +8,7 @@ package GUI;
 import Agents.Eventos;
 import Agents.Interface;
 import Business.UserData;
+import Business.Utilizador;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -198,6 +199,11 @@ public class  AfterLogin extends javax.swing.JFrame {
         jComboBox1.setBounds(310, 210, 80, 20);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-5", "0", "5", "10", "15", "20" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox2);
         jComboBox2.setBounds(450, 210, 80, 20);
 
@@ -247,12 +253,18 @@ public class  AfterLogin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
+        String Utilizador;
         String mensagem=textField.getText();
+        String chuva = jComboBox1.getSelectedItem().toString(); 
+        String tempmin = jComboBox2.getSelectedItem().toString();
+        String tempmax = jComboBox3.getSelectedItem().toString();
+        
+        Utilizador = mensagem+":"+chuva+":"+tempmin+":"+tempmax;
         //GuiEvent ge;
        // ge = new GuiEvent(mensagem,1);
        // myAgent.postGuiEvent(ge);
-       
-        GuiEvent ge = new GuiEvent(mensagem,1);
+      
+        GuiEvent ge = new GuiEvent(Utilizador,1);
         System.out.println("criei o guievent");
         if(myAgent==null){
             System.out.println("agente esta nulo");
@@ -397,6 +409,10 @@ public class  AfterLogin extends javax.swing.JFrame {
        
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
