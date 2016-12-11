@@ -5,6 +5,9 @@
  */
 package Agents;
 
+import Business.Meteo;
+import Business.UserWeather;
+import com.restfb.types.Event;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
@@ -12,6 +15,14 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -56,19 +67,21 @@ public class Tempo extends Agent {
         @Override
         public void action() {
             ACLMessage msg = receive();
-            String str="";
             if (msg != null) {
                 ACLMessage reply = msg.createReply();
                 
                 if (msg.getPerformative() == ACLMessage.REQUEST) {
-                    if (msg.getContent().equals("evento: ")) {
-
-                        str+="RECEBI O PEDIDO DO CONTROLADOR,,,,TEMPO";
-
-                        reply.setContent(str);
-                        reply.setPerformative(ACLMessage.INFORM);
-                        myAgent.send(reply);
+                    try {
+                        if (msg.getContentObject() != null){
+                            Event e = (Event) msg.getContentObject();
+                            UserWeather weather = new UserWeather(e);                
+                            reply.setContentObject((Serializable) weather.getTempo());
+                            reply.setPerformative(ACLMessage.INFORM);
+                            myAgent.send(reply);
                         }
+                    } catch (UnreadableException | JAXBException | IOException ex) {
+                        Logger.getLogger(Tempo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
                     reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
                     myAgent.send(reply);

@@ -5,18 +5,25 @@
  */
 package Behaviours;
 import Agents.Controlador;
+import Business.Acidente;
+import Business.Meteo;
+import Business.UserWeather;
 import com.restfb.types.Event;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 /**
  *
  * @author NMVC
@@ -29,6 +36,11 @@ public class EnviaEvento extends CyclicBehaviour{
     public EnviaEvento (Controlador c, String mensagem)  {
         this.cont = c;
         this.mens = mensagem;
+    }
+    
+    public static long getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
     
     @Override
@@ -78,48 +90,67 @@ public class EnviaEvento extends CyclicBehaviour{
                 Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
+        for (Event event : eventosLista) {
+            System.out.println(event.getName());
+        }
         
         
-        String conteudo2="evento: ";
-        ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
-        msg.setConversationId("");
-        msg2.setContent(conteudo2);
-        AID tempo = new AID();
-        tempo.setLocalName("tempo");
-        msg2.addReceiver(tempo);
-        this.cont.send(msg2);
         
-            if ( resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==tempo) {
+        
+        List<Event> listaEventosTempo = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        for (Event event : eventosLista) {
+            LocalDate eventday = event.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (today.isBefore(eventday) == true) {
+                if (today.plusDays(10).isAfter(eventday)) {
+                    if ("CleverE".equals(event.getName())) {
+                        try {
+                            ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
+                            msg.setConversationId("");
+                            msg2.setContentObject( (Serializable) event);
+                            AID tempo = new AID();
+                            tempo.setLocalName("tempo");
+                            msg2.addReceiver(tempo);
+                            this.cont.send(msg2);
+                            resp = this.cont.blockingReceive(300000);
+                            Meteo tempos;
+                            tempos = (Meteo) resp.getContentObject();
+                            int code = tempos.getCode();
+                            if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 30) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
+                                listaEventosTempo.add(event);
+                        } catch (IOException | UnreadableException ex) {
+                        Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }else {
+                    listaEventosTempo.add(event);         
+                }
+            } 
+        }
+        
+        
+        for (Event event : listaEventosTempo) {
+            try {
+                LocalDate eventday = event.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
+                msg.setConversationId("");
+                msg2.setContentObject( (Serializable) event);
+                AID tempo = new AID();
+                tempo.setLocalName("transito");
+                msg2.addReceiver(tempo);
+                this.cont.send(msg2);
+                resp = this.cont.blockingReceive(900000);
+                List<Acidente> acidentes;
+                acidentes = (List<Acidente>) resp.getContentObject();
                 
-                if(resp.getContent()!= null) {
-                    //System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+resp.getContent());
-                    System.out.println("meteoxxxxxxxxxx"+resp.getContent()+resp.getSender());
-                    
-                   
-                }
+                if (acidentes == null)
+                    System.out.println("NADAAA");
+                
+            } catch (IOException | UnreadableException ex) {
+                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-        String conteudo3="evento: ";
-        ACLMessage msg3 = new ACLMessage(ACLMessage.REQUEST);
-        msg.setConversationId("");
-        msg3.setContent(conteudo3);
-        AID transito = new AID();
-        transito.setLocalName("transito");
-        msg3.addReceiver(transito);
-        this.cont.send(msg3);
-        
-            if ( resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==transito) {
-               
-                if(resp.getContent()!= null) {
-                    //System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+resp.getContent());
-                    System.out.println("tansitoxxxxxxxxx"+resp.getContent()+resp.getSender());
-                   
-                }
-            }
-        
-        conteudo = conteudo.substring(0,conteudo.length()-1);
+        }
 
         ACLMessage nova = new ACLMessage(ACLMessage.INFORM);
         AID inter = new AID();
@@ -127,7 +158,7 @@ public class EnviaEvento extends CyclicBehaviour{
         nova.addReceiver(inter);
         nova.setConversationId("");
         try {
-            nova.setContentObject((Serializable) eventosLista);
+            nova.setContentObject((Serializable) listaEventosTempo);
         } catch (IOException ex) {
             Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }

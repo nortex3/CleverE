@@ -5,6 +5,7 @@
  */
 package Business;
 
+import com.restfb.types.Event;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,46 +27,23 @@ public class UserTraffic {
     private final String bingMapsKey = "ApanNzfcCujm2CegUMWN20gHr78rAwt6x-hz70tjCJ9dtoBnALS4NSupUIqeO_qv";
     private final String RestUrlBase = "http://dev.virtualearth.net/REST/V1/Traffic/Incidents";
     
-    ArrayList<acidente> acidentes;
+    public List<Acidente> acidentes;    
     
-    public class acidente {
-        int severidade;
-        String descricao; 
-        
-        public acidente(int severidade, String descricao) {
-            this.severidade = severidade;
-            this.descricao = descricao;
-        }
-
-        public int getSeveridade() {
-            return severidade;
-        }
-
-        public String getDescricao() {
-            return descricao;
-        }
-
-        @Override
-        public String toString() {
-            return "acidente{" + "severidade=" + severidade + ", descricao=" + descricao + '}';
-        }
-    }
-    
-    
-    public UserTraffic (double lat, double lon) throws IOException {
-        JSONObject obj = new JSONObject(this.requestJSON(lat, lon));
+    public UserTraffic (Event event) throws IOException {
+        JSONObject obj = new JSONObject(this.requestJSON(40.785091,  -73.968285));
         
         JSONArray res = obj.getJSONArray("resourceSets").getJSONObject(0).getJSONArray("resources");
+        this.acidentes = new ArrayList<>();
         
         for (int i = 0; i < res.length(); i++) {
-            acidente ac = new acidente(res.getJSONObject(i).getInt("severity"), res.getJSONObject(i).getString("description"));
+            Acidente ac = new Acidente(res.getJSONObject(i).getInt("severity"), res.getJSONObject(i).getString("description"));
+            System.out.println(ac.toString());
             acidentes.add(ac);
         }
-        
     }
     
-    public ArrayList<acidente> getAcidentes() {
-        return acidentes;
+    public ArrayList<Acidente> getAcidentes() {
+        return (ArrayList<Acidente>) acidentes;
     }
      
     private String getBoundingBox(final double pLatitude, final double pLongitude, final int pDistanceInMeters) {
@@ -129,7 +108,7 @@ public class UserTraffic {
 
     @Override
     public String toString() {
-        return "UserTraffic{, acidentes=" + acidentes + '}';
+        return "UserTraffic{, acidentes=" + acidentes.toString() + '}';
     }
     
     

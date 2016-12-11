@@ -9,6 +9,7 @@ import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.Channel;
 import com.github.fedy2.weather.data.Forecast;
 import com.github.fedy2.weather.data.unit.DegreeUnit;
+import com.restfb.types.Event;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,8 @@ import java.net.URLConnection;
 import javax.xml.bind.JAXBException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  *
@@ -27,46 +30,57 @@ public class UserWeather {
     
     YahooWeatherService service;
     Channel result;
-    int tempMin;
-    int tempMax;
-    String descricao;
-
+    Meteo tempo;
     
     // 737514 é oo codigo da yahoo de braga, nao sei como procurar codigos para outras cidades
-    public UserWeather() throws JAXBException, IOException {
-        this.service = new YahooWeatherService();
-        this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
-        for (Forecast dia : this.result.getItem().getForecasts()) {
-            if ("08 Dec 2016".equals(dia.getDate())) {
-                this.tempMin = dia.getLow();
-                this.tempMax = dia.getHigh();
-                this.descricao = dia.getText();
-                break;
-            }
-        }
+    /* public UserWeather() throws JAXBException, IOException {
+    this.service = new YahooWeatherService();
+    this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
+    for (Forecast dia : this.result.getItem().getForecasts()) {
+    if ("08 Dec 2016".equals(dia.getDate())) {
+    this.tempMin = dia.getLow();
+    this.tempMax = dia.getHigh();
+    this.descricao = dia.getText();
+    break;
+    }
+    }
     }
     
     public UserWeather(String data) throws JAXBException, IOException {
-        this.service = new YahooWeatherService();
-        this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
-        for (Forecast dia : this.result.getItem().getForecasts()) {
-            if (data.equals(dia.getDate())) {
-                this.tempMin = dia.getLow();
-                this.tempMax = dia.getHigh();
-                this.descricao = dia.getText();
-                break;
-            }
-        }
+    this.service = new YahooWeatherService();
+    this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
+    for (Forecast dia : this.result.getItem().getForecasts()) {
+    if (data.equals(dia.getDate())) {
+    this.tempMin = dia.getLow();
+    this.tempMax = dia.getHigh();
+    this.descricao = dia.getText();
+    break;
+    }
+    }
     }
     
     public UserWeather(String cidade, String data) throws JAXBException, IOException {
+    this.service = new YahooWeatherService();
+    this.result = service.getForecast(getWOEID(cidade), DegreeUnit.CELSIUS);
+    for (Forecast dia : this.result.getItem().getForecasts()) {
+    if (data.equals(dia.getDate())) {
+    this.tempMin = dia.getLow();
+    this.tempMax = dia.getHigh();
+    this.descricao = dia.getText();
+    break;
+    }
+    }
+    }*/
+    
+    public UserWeather(Event e) throws JAXBException, IOException {
         this.service = new YahooWeatherService();
-        this.result = service.getForecast(getWOEID(cidade), DegreeUnit.CELSIUS);
+        this.result = service.getForecast("44418", DegreeUnit.CELSIUS);
+        LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         for (Forecast dia : this.result.getItem().getForecasts()) {
-            if (data.equals(dia.getDate())) {
-                this.tempMin = dia.getLow();
-                this.tempMax = dia.getHigh();
-                this.descricao = dia.getText();
+            LocalDate fore = dia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (eventday.equals(fore)) {
+                this.tempo = new Meteo(dia.getLow(), dia.getHigh(), dia.getText(), dia.getCode());
+                System.out.println(dia.getLow() + '\n' + dia.getHigh() + '\n'+ dia.getText());
                 break;
             }
         }
@@ -98,7 +112,7 @@ public class UserWeather {
         return output;        
     }
 
-    public YahooWeatherService getService() {
+    private YahooWeatherService getService() {
         return this.service;
     }
 
@@ -107,23 +121,24 @@ public class UserWeather {
     }
 
     public int getTempMin() {
-        return this.tempMin;
+        return this.tempo.tempMin;
     }
 
     public int getTempMax() {
-        return this.tempMax;
+        return this.tempo.tempMax;
     }
 
     public String getDescricao() {
-        return this.descricao;
+        return this.tempo.descricao;
     }
+
+    public Meteo getTempo() {
+        return tempo;
+    }
+    
 
     @Override
     public String toString() {
-        return "UserWeather{" + "tempMin=" + tempMin + ", tempMax=" + tempMax + ", descricao=" + descricao + '}';
-    }
-
-    
-    
-    
+        return "UserWeather{" + "tempMin=" + tempo.tempMin + ", tempMax=" + tempo.tempMax + ", descricao=" + tempo.descricao + '}';
+    }    
 }
