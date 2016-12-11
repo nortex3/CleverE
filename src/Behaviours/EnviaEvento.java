@@ -78,25 +78,6 @@ public class EnviaEvento extends CyclicBehaviour{
                 Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (resp != null && resp.getPerformative() == ACLMessage.INFORM && resp.getSender()==eventos) {
-            try {
-                if(resp.getContentObject() != null) {
-                   
-                    System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
-                    eventosLista = (List<Event>) resp.getContentObject();
-                   
-                }
-            } catch (UnreadableException ex) {
-                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        for (Event event : eventosLista) {
-            System.out.println(event.getName());
-        }
-        
-        
-        
         
         List<Event> listaEventosTempo = new ArrayList<>();
         LocalDate today = LocalDate.now();
@@ -114,11 +95,13 @@ public class EnviaEvento extends CyclicBehaviour{
                             msg2.addReceiver(tempo);
                             this.cont.send(msg2);
                             resp = this.cont.blockingReceive(300000);
-                            Meteo tempos;
-                            tempos = (Meteo) resp.getContentObject();
-                            int code = tempos.getCode();
-                            if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 30) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
-                                listaEventosTempo.add(event);
+                            if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                                Meteo tempos;
+                                tempos = (Meteo) resp.getContentObject();
+                                int code = tempos.getCode();
+                                if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 30) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
+                                    listaEventosTempo.add(event);
+                            }
                         } catch (IOException | UnreadableException ex) {
                         Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -136,17 +119,15 @@ public class EnviaEvento extends CyclicBehaviour{
                 ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
                 msg.setConversationId("");
                 msg2.setContentObject( (Serializable) event);
-                AID tempo = new AID();
-                tempo.setLocalName("transito");
-                msg2.addReceiver(tempo);
+                AID transito = new AID();
+                transito.setLocalName("transito");
+                msg2.addReceiver(transito);
                 this.cont.send(msg2);
                 resp = this.cont.blockingReceive(900000);
-                List<Acidente> acidentes;
-                acidentes = (List<Acidente>) resp.getContentObject();
-                
-                if (acidentes == null)
-                    System.out.println("NADAAA");
-                
+                if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                    List<Acidente> acidentes;
+                    acidentes = (List<Acidente>) resp.getContentObject();
+                }
             } catch (IOException | UnreadableException ex) {
                 Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
