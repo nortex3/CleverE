@@ -127,6 +127,13 @@ public class EnviaEvento extends CyclicBehaviour{
                 if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
                     List<Acidente> acidentes;
                     acidentes = (List<Acidente>) resp.getContentObject();
+                    int total=0;
+                    for(Acidente a : acidentes){                     
+                        total += a.getSeveridade();                    
+                    }
+                    if(total >= 10){
+                        listaEventosTempo.remove(event);
+                    }
                 }
             } catch (IOException | UnreadableException ex) {
                 Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
