@@ -32,7 +32,7 @@ public class UserTraffic {
     public UserTraffic (Event event) throws IOException {
         JSONObject obj;
         if ("CleverE".equals(event.getName())) {
-            obj = new JSONObject(this.requestJSON(33.773409, -118.224533));
+            obj = new JSONObject(this.requestJSON(40.785091,  -73.968285));
         } else {
             obj = new JSONObject(this.requestJSON(event.getPlace().getLocation().getLatitude(),  event.getPlace().getLocation().getLongitude()));
         }

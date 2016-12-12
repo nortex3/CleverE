@@ -88,12 +88,13 @@ public class UserWeather {
     
     public UserWeather(Event e) throws JAXBException, IOException {
         LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        if (eventday.getDayOfWeek().getValue() == 1) {
+        int coiso = eventday.getDayOfWeek().getValue();
+        if (coiso  == 1 || coiso == 3 || coiso == 5 || coiso == 7) {
             this.tempo = new Meteo(0, 14, "Showers",11);
-            System.out.println(tempo.getTempMin() + '\n' + tempo.getTempMax() + '\n'+ tempo.getDescricao());
+            System.out.println(tempo.getTempMin() + "\n" + tempo.getTempMax() + "\n"+ tempo.getDescricao());
         } else {
-            this.tempo = new Meteo(-100, 4500, "Showers",11);
-            System.out.println(tempo.getTempMin() + '\n' + tempo.getTempMax() + '\n'+ tempo.getDescricao());
+            this.tempo = new Meteo(19,34, "Sunny",32);
+            System.out.println(tempo.getTempMin() + "\n" + tempo.getTempMax() + "\n"+ tempo.getDescricao());
         }
         
     }

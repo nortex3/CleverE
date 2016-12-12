@@ -100,8 +100,6 @@ public class EnviaEvento extends CyclicBehaviour{
                             Meteo tempos;
                             tempos = (Meteo) resp.getContentObject();
                             int code = tempos.getCode();
-                            System.out.println(tempos.toString());
-                            System.out.println(tempos.getTempMin() + " \n" + (Double.parseDouble(this.cont.getTempMin())) + " \n" + tempos.getTempMax() + " \n" + (Double.parseDouble(this.cont.getTempMax()))  );
                             if (((tempos.getTempMin() >= (Integer.parseInt(this.cont.getTempMin()))) && tempos.getTempMax() <= (Integer.parseInt(this.cont.getTempMax())))){
                                 if(((code > 18 || code < 34) || code == 36 || code == 3200) || ("Sim".equals(this.cont.getChuva()) && code > 7)) { 
                                     listaEventosTempo.add(event);
@@ -146,6 +144,8 @@ public class EnviaEvento extends CyclicBehaviour{
                 } catch (IOException | UnreadableException ex) {
                     Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                listafinal.add(event);
             }
         }
 
