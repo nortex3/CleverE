@@ -204,11 +204,11 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(450, 210, 80, 20);
+        jComboBox2.setBounds(450, 210, 80, 26);
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "15", "20", "25", "30", "35", "40", "45" }));
         getContentPane().add(jComboBox3);
-        jComboBox3.setBounds(600, 210, 80, 20);
+        jComboBox3.setBounds(600, 210, 80, 26);
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Utilizador");
@@ -223,7 +223,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(390, 430, 160, 70);
+        jButton4.setBounds(380, 430, 160, 70);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);

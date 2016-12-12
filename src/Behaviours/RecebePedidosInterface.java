@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@author AvôCantigas
 
 public class RecebePedidosInterface extends CyclicBehaviour {
     private Controlador cont;
