@@ -101,7 +101,7 @@ public class EnviaEvento extends CyclicBehaviour{
                             tempos = (Meteo) resp.getContentObject();
                             int code = tempos.getCode();
                             if (((tempos.getTempMin() >= (Integer.parseInt(this.cont.getTempMin()))) && tempos.getTempMax() <= (Integer.parseInt(this.cont.getTempMax())))){
-                                if(((code > 18 || code < 34) || code == 36 || code == 3200) || ("Sim".equals(this.cont.getChuva()) && code > 7)) { 
+                                if(("Sim".equals(this.cont.getChuva()) && code > 7) || ("Não".equals(this.cont.getChuva()) && (code > 18 && code<=34) || code==36 || code==3200)) { 
                                     listaEventosTempo.add(event);
                                 }
                             }
