@@ -54,6 +54,7 @@ public class EnviaEvento extends CyclicBehaviour{
         AID eventos = new AID();
         eventos.setLocalName("eventos");
         msg.addReceiver(eventos);
+        List<Event>listafinal = new ArrayList<>();
         
         this.cont.send(msg);
  
@@ -98,16 +99,12 @@ public class EnviaEvento extends CyclicBehaviour{
                         if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
                             Meteo tempos;
                             tempos = (Meteo) resp.getContentObject();
-                            if (tempos == null)
-                                System.out.println("TEMPO NULL");
                             int code = tempos.getCode();
                             System.out.println(tempos.toString());
                             System.out.println(tempos.getTempMin() + " \n" + (Double.parseDouble(this.cont.getTempMin())) + " \n" + tempos.getTempMax() + " \n" + (Double.parseDouble(this.cont.getTempMax()))  );
                             if (((tempos.getTempMin() >= (Integer.parseInt(this.cont.getTempMin()))) && tempos.getTempMax() <= (Integer.parseInt(this.cont.getTempMax())))){
-                                System.out.println("PASSA TEMP");
                                 if(((code > 18 || code < 34) || code == 36 || code == 3200) || ("Sim".equals(this.cont.getChuva()) && code > 7)) { 
                                     listaEventosTempo.add(event);
-                                    System.out.println("ADICIONEI NA TEMP");
                                 }
                             }
                         }
@@ -115,7 +112,7 @@ public class EnviaEvento extends CyclicBehaviour{
                     Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else {
-                    listaEventosTempo.add(event);         
+                    listafinal.add(event);         
                 }
             } 
         }
@@ -141,8 +138,8 @@ public class EnviaEvento extends CyclicBehaviour{
                         for(Acidente a : acidentes){                     
                             total += a.getSeveridade();                    
                         }
-                        if(total >= 10){
-                            listaEventosTempo.remove(event);
+                        if(total <= 10){
+                            listafinal.add(event);
                             System.out.println("bazei da lista por transito" + total);
                         }
                     }
@@ -158,7 +155,7 @@ public class EnviaEvento extends CyclicBehaviour{
         nova.addReceiver(inter);
         nova.setConversationId("");
         try {
-            nova.setContentObject((Serializable) listaEventosTempo);
+            nova.setContentObject((Serializable) listafinal);
         } catch (IOException ex) {
             Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
