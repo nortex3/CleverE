@@ -72,18 +72,30 @@ public class UserWeather {
     }
     }*/
     
+    /*public UserWeather(Event e) throws JAXBException, IOException {
+    this.service = new YahooWeatherService();
+    this.result = service.getForecast("44418", DegreeUnit.CELSIUS);
+    LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    for (Forecast dia : this.result.getItem().getForecasts()) {
+    LocalDate fore = dia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    if (eventday.equals(fore)) {
+    this.tempo = new Meteo(dia.getLow(), dia.getHigh(), dia.getText(), dia.getCode());
+    System.out.println(dia.getLow() + '\n' + dia.getHigh() + '\n'+ dia.getText());
+    break;
+    }
+    }
+    }*/
+    
     public UserWeather(Event e) throws JAXBException, IOException {
-        this.service = new YahooWeatherService();
-        this.result = service.getForecast("44418", DegreeUnit.CELSIUS);
         LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        for (Forecast dia : this.result.getItem().getForecasts()) {
-            LocalDate fore = dia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (eventday.equals(fore)) {
-                this.tempo = new Meteo(dia.getLow(), dia.getHigh(), dia.getText(), dia.getCode());
-                System.out.println(dia.getLow() + '\n' + dia.getHigh() + '\n'+ dia.getText());
-                break;
-            }
+        if (eventday.getDayOfWeek().getValue() == 1) {
+            this.tempo = new Meteo(0, 9, "Showers",11);
+            System.out.println(tempo.getTempMin() + '\n' + tempo.getTempMax() + '\n'+ tempo.getDescricao());
+        } else {
+            this.tempo = new Meteo(-100, 4500, "Showers",11);
+            System.out.println(tempo.getTempMin() + '\n' + tempo.getTempMax() + '\n'+ tempo.getDescricao());
         }
+        
     }
     
     private String getWOEID(String cidade) throws IOException {

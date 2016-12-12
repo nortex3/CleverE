@@ -30,7 +30,12 @@ public class UserTraffic {
     public List<Acidente> acidentes;    
     
     public UserTraffic (Event event) throws IOException {
-        JSONObject obj = new JSONObject(this.requestJSON(40.785091,  -73.968285));
+        JSONObject obj;
+        if (event.getName() == "CleverE") {
+            obj = new JSONObject(this.requestJSON(40.785091,  -73.968285));
+        } else {
+            obj = new JSONObject(this.requestJSON(event.getPlace().getLocation().getLatitude(),  event.getPlace().getLocation().getLongitude()));
+        }
         
         JSONArray res = obj.getJSONArray("resourceSets").getJSONObject(0).getJSONArray("resources");
         this.acidentes = new ArrayList<>();

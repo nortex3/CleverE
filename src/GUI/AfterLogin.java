@@ -8,7 +8,6 @@ package GUI;
 import Agents.Eventos;
 import Agents.Interface;
 import Business.UserData;
-import Business.Utilizador;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;

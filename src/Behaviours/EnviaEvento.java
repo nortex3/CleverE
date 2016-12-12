@@ -82,29 +82,32 @@ public class EnviaEvento extends CyclicBehaviour{
         List<Event> listaEventosTempo = new ArrayList<>();
         LocalDate today = LocalDate.now();
         for (Event event : eventosLista) {
+            System.out.println(event.getName());
             LocalDate eventday = event.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (today.isBefore(eventday) == true) {
+            if (today.minusDays(1).isBefore(eventday)) {
                 if (today.plusDays(10).isAfter(eventday)) {
-                    if ("CleverE".equals(event.getName())) {
-                        try {
-                            ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
-                            msg.setConversationId("");
-                            msg2.setContentObject( (Serializable) event);
-                            AID tempo = new AID();
-                            tempo.setLocalName("tempo");
-                            msg2.addReceiver(tempo);
-                            this.cont.send(msg2);
-                            resp = this.cont.blockingReceive(300000);
-                            if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
-                                Meteo tempos;
-                                tempos = (Meteo) resp.getContentObject();
-                                int code = tempos.getCode();
-                                if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 30) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
+                    try {
+                        ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
+                        msg.setConversationId("");
+                        msg2.setContentObject( (Serializable) event);
+                        AID tempo = new AID();
+                        tempo.setLocalName("tempo");
+                        msg2.addReceiver(tempo);
+                        this.cont.send(msg2);
+                        resp = this.cont.blockingReceive(300000);
+                        if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                            Meteo tempos;
+                            tempos = (Meteo) resp.getContentObject();
+                            int code = tempos.getCode();
+                            System.out.println(tempos.toString());
+                            if (((tempos.getTempMin() >= (Double.parseDouble(this.cont.getTempMin()))) && tempos.getTempMax() <= (Double.parseDouble(this.cont.getTempMax()))))
+                                if(((code > 18 || code < 34) || code == 36 || code == 3200) || ("Sim".equals(this.cont.getChuva()) && code > 7)) { 
                                     listaEventosTempo.add(event);
+                                    System.out.println("ADICIONEI NA TEMP");
                             }
-                        } catch (IOException | UnreadableException ex) {
-                        Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    } catch (IOException | UnreadableException ex) {
+                    Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else {
                     listaEventosTempo.add(event);         
@@ -114,29 +117,33 @@ public class EnviaEvento extends CyclicBehaviour{
         
         
         for (Event event : listaEventosTempo) {
-            try {
-                LocalDate eventday = event.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
-                msg.setConversationId("");
-                msg2.setContentObject( (Serializable) event);
-                AID transito = new AID();
-                transito.setLocalName("transito");
-                msg2.addReceiver(transito);
-                this.cont.send(msg2);
-                resp = this.cont.blockingReceive(900000);
-                if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
-                    List<Acidente> acidentes;
-                    acidentes = (List<Acidente>) resp.getContentObject();
-                    int total=0;
-                    for(Acidente a : acidentes){                     
-                        total += a.getSeveridade();                    
+            System.out.println(event.getName());
+            LocalDate eventday = event.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (eventday.equals(today)) {
+                try {
+                    ACLMessage msg2 = new ACLMessage(ACLMessage.REQUEST);
+                    msg.setConversationId("");
+                    msg2.setContentObject( (Serializable) event);
+                    AID transito = new AID();
+                    transito.setLocalName("transito");
+                    msg2.addReceiver(transito);
+                    this.cont.send(msg2);
+                    resp = this.cont.blockingReceive(900000);
+                    if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                        List<Acidente> acidentes;
+                        acidentes = (List<Acidente>) resp.getContentObject();
+                        int total=0;
+                        for(Acidente a : acidentes){                     
+                            total += a.getSeveridade();                    
+                        }
+                        if(total >= 10){
+                            listaEventosTempo.remove(event);
+                            System.out.println("bazei da lista por transito" + total);
+                        }
                     }
-                    if(total >= 10){
-                        listaEventosTempo.remove(event);
-                    }
+                } catch (IOException | UnreadableException ex) {
+                    Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (IOException | UnreadableException ex) {
-                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
