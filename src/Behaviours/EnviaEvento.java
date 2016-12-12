@@ -96,18 +96,28 @@ public class EnviaEvento extends CyclicBehaviour{
                             this.cont.send(msg2);
                             resp = this.cont.blockingReceive(300000);
                             if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                                 AID receiver = new AID();
+                                receiver.setLocalName("eventos");
+                                long time = System.currentTimeMillis();
+                                ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                                accept.setContent("recebi");
+                                accept.setConversationId(""+time);
+                                accept.addReceiver(receiver);
+                                this.cont.send(accept);
+                    
                                 Meteo tempos;
                                 tempos = (Meteo) resp.getContentObject();
                                 int code = tempos.getCode();
-                                if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 30) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
+                                if ((tempos.getTempMax() >= -10 && tempos.getTempMin() <= 10) && ((code >= 18 && code <= 34) || code == 36 || code == 3200))
                                     listaEventosTempo.add(event);
+                                System.out.println(tempos.getTempMin());
                             }
                         } catch (IOException | UnreadableException ex) {
                         Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }else {
-                    listaEventosTempo.add(event);         
+                    //listaEventosTempo.add(event);         
                 }
             } 
         }
@@ -125,6 +135,15 @@ public class EnviaEvento extends CyclicBehaviour{
                 this.cont.send(msg2);
                 resp = this.cont.blockingReceive(900000);
                 if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
+                     AID receiver = new AID();
+                    receiver.setLocalName("eventos");
+                    long time = System.currentTimeMillis();
+                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    accept.setContent("recebi");
+                    accept.setConversationId(""+time);
+                    accept.addReceiver(receiver);
+                    this.cont.send(accept);
+                    
                     List<Acidente> acidentes;
                     acidentes = (List<Acidente>) resp.getContentObject();
                     int total=0;
