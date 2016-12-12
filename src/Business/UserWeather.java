@@ -89,7 +89,7 @@ public class UserWeather {
     public UserWeather(Event e) throws JAXBException, IOException {
         LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         if (eventday.getDayOfWeek().getValue() == 1) {
-            this.tempo = new Meteo(0, 9, "Showers",11);
+            this.tempo = new Meteo(0, 14, "Showers",11);
             System.out.println(tempo.getTempMin() + '\n' + tempo.getTempMax() + '\n'+ tempo.getDescricao());
         } else {
             this.tempo = new Meteo(-100, 4500, "Showers",11);

@@ -98,12 +98,17 @@ public class EnviaEvento extends CyclicBehaviour{
                         if (resp != null && resp.getPerformative() == ACLMessage.INFORM) {
                             Meteo tempos;
                             tempos = (Meteo) resp.getContentObject();
+                            if (tempos == null)
+                                System.out.println("TEMPO NULL");
                             int code = tempos.getCode();
                             System.out.println(tempos.toString());
-                            if (((tempos.getTempMin() >= (Double.parseDouble(this.cont.getTempMin()))) && tempos.getTempMax() <= (Double.parseDouble(this.cont.getTempMax()))))
+                            System.out.println(tempos.getTempMin() + " \n" + (Double.parseDouble(this.cont.getTempMin())) + " \n" + tempos.getTempMax() + " \n" + (Double.parseDouble(this.cont.getTempMax()))  );
+                            if (((tempos.getTempMin() >= (Integer.parseInt(this.cont.getTempMin()))) && tempos.getTempMax() <= (Integer.parseInt(this.cont.getTempMax())))){
+                                System.out.println("PASSA TEMP");
                                 if(((code > 18 || code < 34) || code == 36 || code == 3200) || ("Sim".equals(this.cont.getChuva()) && code > 7)) { 
                                     listaEventosTempo.add(event);
                                     System.out.println("ADICIONEI NA TEMP");
+                                }
                             }
                         }
                     } catch (IOException | UnreadableException ex) {

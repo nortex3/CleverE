@@ -53,8 +53,8 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                 String[] parts = Utilizador.split(":");
                 this.cont.setMensagem(parts[0]);
                 this.cont.setChuva(parts[1]);
-                this.cont.setTempMax(parts[2]);
-                this.cont.setTempMin(parts[3]);
+                this.cont.setTempMin(parts[2]);
+                this.cont.setTempMax(parts[3]);
                 System.out.println(this.cont.getMensagem()+" "+this.cont.getChuva()+" "+this.cont.getTempMax()+" "+this.cont.getTempMin());
                 //mensagem = this.cont.blockingReceive(3000);
                 if(this.cont.getMensagem().equals("daAgentes")){
