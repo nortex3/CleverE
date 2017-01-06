@@ -7,7 +7,6 @@ package Behaviours;
 import Agents.Interface;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 /**
  *

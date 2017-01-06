@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -29,7 +28,6 @@ import javax.swing.DefaultListModel;
 public class RecebeInfoControlador extends CyclicBehaviour{
     
     private Interface inter;
-    //private AfterLogin aft;
     
     public RecebeInfoControlador(Interface i) {
         this.inter = i;
@@ -41,67 +39,52 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         ACLMessage recebida = this.inter.receive();
         
         if (recebida != null) {
-            Object eventos = new ArrayList<Event>();
+            Object eventos = new ArrayList<>();
             if (recebida.getPerformative() == ACLMessage.INFORM) {
-                //if (recebida.getContent().matches("evento:*")){
                     System.out.println("ENTREI");
-                   
+                    
                 try {
                     eventos =  recebida.getContentObject();
                     System.out.println("XXXXXXXXXXX\n" + eventos.toString());
                 } catch (UnreadableException ex) {
                     Logger.getLogger(RecebeInfoControlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    ListaEventos le = new ListaEventos();
-                    le.setVisible(true);
-                    le.mostraEventos((List<Event>) eventos);
-                   
-                    //for(String ss : eventos[1].split(";"))
-                        //processa a mensagem 
-                        
-                    AID receiver = new AID();
-                    receiver.setLocalName("controlador");
-                    long time = System.currentTimeMillis();
-                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
-                    accept.setContent("recebi");
-                    accept.setConversationId(""+time);
-                    accept.addReceiver(receiver);
-                    this.inter.send(accept);
-                    System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
-                        //}
-                 if(recebida.getContent().matches("agentes:.+")){
+                
+                ListaEventos le = new ListaEventos();
+                le.setVisible(true);
+                le.mostraEventos((List<Event>) eventos);
+
+                AID receiver = new AID();
+                receiver.setLocalName("controlador");
+                long time = System.currentTimeMillis();
+                ACLMessage accept = new ACLMessage(ACLMessage.CONFIRM);
+                accept.setContent("recebi");
+                accept.setConversationId(""+time);
+                accept.addReceiver(receiver);
+                this.inter.send(accept);
+                System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
+
+                if(recebida.getContent().matches("agentes:.+")){
                     System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
-                    List<String> agentes = new ArrayList<String>(Arrays.asList(recebida.getContent().split(":")));
-                    //for(String ss: agentes[1].split(";")){
-                        YellowPages yp = new YellowPages();
-                        yp.setVisible(true);
-                        yp.mostraAgentes(agentes);
-                        //System.out.println(agentes);
-                        //AfterLogin aft = new AfterLogin();
-                        //aft.mostraAgentes(agentes);
-                        //aft.mostra(agentes);
-                        
+                    List<String> agentes = new ArrayList<>(Arrays.asList(recebida.getContent().split(":")));
+                    YellowPages yp = new YellowPages();
+                    yp.setVisible(true);
+                    yp.mostraAgentes(agentes);
+
                     AID receiver2 = new AID();
                     receiver2.setLocalName("controlador");
-                    //long time = System.currentTimeMillis();
-                    ACLMessage accept2 = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    ACLMessage accept2 = new ACLMessage(ACLMessage.CONFIRM);
                     accept.setContent("recebi");
                     accept.setConversationId(""+time);
                     accept.addReceiver(receiver);
                     this.inter.send(accept);
-                        
-                        
-                        //System.out.println(ss);
-                    //}
                 }
+                
             } else if(recebida.getPerformative() == ACLMessage.NOT_UNDERSTOOD){
                 AfterLogin af = new AfterLogin();
                 af.mostraOptionPane();
-                //System.out.println(recebida.getSender().getLocalName() + " -> " + recebida.getContent());
-                //System.out.println("Interface: Recebi mensagem que não me interessa");
             }
         }
         block();
     }
-    
 }

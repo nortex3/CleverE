@@ -7,7 +7,6 @@ package Behaviours;
 import Agents.Controlador;
 import Business.Acidente;
 import Business.Meteo;
-import Business.UserWeather;
 import com.restfb.types.Event;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 /**
  *
  * @author NMVC
@@ -65,15 +63,13 @@ public class EnviaEvento extends CyclicBehaviour{
                     AID receiver = new AID();
                     receiver.setLocalName("eventos");
                     long time = System.currentTimeMillis();
-                    ACLMessage accept = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                    ACLMessage accept = new ACLMessage(ACLMessage.CONFIRM);
                     accept.setContent("recebi");
                     accept.setConversationId(""+time);
                     accept.addReceiver(receiver);
                     this.cont.send(accept);
                     
                     eventosLista = (List<Event>) resp.getContentObject();
-                    /*System.out.println(resp.getSender().getLocalName() + " -> " + resp.getContent());
-                    conteudo += resp.getSender().getLocalName() + "," + resp.getContent() + ";";*/
                 }
             } catch (UnreadableException ex) {
                 Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);

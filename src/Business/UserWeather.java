@@ -7,8 +7,6 @@ package Business;
 
 import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.Channel;
-import com.github.fedy2.weather.data.Forecast;
-import com.github.fedy2.weather.data.unit.DegreeUnit;
 import com.restfb.types.Event;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -96,7 +94,6 @@ public class UserWeather {
             this.tempo = new Meteo(19,34, "Sunny",32);
             System.out.println(tempo.getTempMin() + "\n" + tempo.getTempMax() + "\n"+ tempo.getDescricao());
         }
-        
     }
     
     private String getWOEID(String cidade) throws IOException {

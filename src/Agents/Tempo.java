@@ -5,7 +5,6 @@
  */
 package Agents;
 
-import Business.Meteo;
 import Business.UserWeather;
 import com.restfb.types.Event;
 import jade.core.Agent;
@@ -18,8 +17,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
@@ -56,7 +53,7 @@ public class Tempo extends Agent {
         
         try{
             DFService.deregister(this);
-        }catch(Exception e){
+        }catch(FIPAException e){
             e.printStackTrace();
         }
         System.out.println(this.getLocalName()+" a morrer...");

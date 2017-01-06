@@ -6,34 +6,14 @@
  */
 package Agents;
 
-//import authuser.login;
-
-
-import Behaviours.IniciaInterface;
-import Behaviours.PedeListaAgentes;
 import Behaviours.RecebeInfoControlador;
 import GUI.AfterLogin;
-import GUI.Login;
-import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.types.Event;
-import com.restfb.types.User;
 import jade.core.AID;
-
-import jade.core.Agent;
 import jade.gui.GuiAgent;
 import jade.gui.GuiEvent;
 import jade.lang.acl.ACLMessage;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 
 /**
  *
@@ -49,13 +29,9 @@ public class Interface extends GuiAgent {
     protected AfterLogin myGui;
     
     private FacebookClient fbClient;
-    // private ArrayList<String> ListaEventos;
-    
-   
-    
-     public Interface(){
+     
+    public Interface(){
         this.fbClient = new DefaultFacebookClient();
-        // this.ListaEventos = new ArrayList<>();
     }
      
     
@@ -66,13 +42,7 @@ public class Interface extends GuiAgent {
         myGui.setVisible(true);
         
         super.setup();
-        
-        //adicionar behaviours aqui
-        //this.addBehaviour(new IniciaInterface(this));
-        //this.addBehaviour(new PedeListaAgentes(this));
         this.addBehaviour(new RecebeInfoControlador(this));
-       
-       
     }
     
     protected void onGuiEvent(GuiEvent ev){
@@ -105,11 +75,5 @@ public class Interface extends GuiAgent {
     
     public FacebookClient getFbClient(){
         return this.fbClient;
-    }
-    
-    
- 
-    
-    
-    
+    }    
 }

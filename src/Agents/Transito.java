@@ -5,7 +5,6 @@
  */
 package Agents;
 
-import Business.Acidente;
 import Business.UserTraffic;
 import com.restfb.types.Event;
 import jade.core.Agent;
@@ -18,7 +17,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,14 +26,13 @@ import java.util.logging.Logger;
  */
 public class Transito extends Agent{
     
-     protected void setup() {
+    protected void setup() {
         super.setup();
         
         DFAgentDescription dfs = new DFAgentDescription();
         dfs.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
         sd.setName(getLocalName());
-        
         sd.setType("agentes");
         dfs.addServices(sd);
         
@@ -49,7 +46,7 @@ public class Transito extends Agent{
         this.addBehaviour(new ReceiveBehaviour());
     }
     
-     protected void takeDown(){
+    protected void takeDown(){
         super.takeDown();
         
         try{
@@ -60,7 +57,7 @@ public class Transito extends Agent{
         System.out.println(this.getLocalName()+" a morrer...");
     }
     
-      private class ReceiveBehaviour extends CyclicBehaviour {
+    private class ReceiveBehaviour extends CyclicBehaviour {
 
         @Override
         public void action() {

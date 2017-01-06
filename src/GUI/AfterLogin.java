@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Agents.Eventos;
 import Agents.Interface;
 import Business.UserData;
 import com.restfb.Connection;
@@ -15,13 +14,6 @@ import com.restfb.types.Event;
 import com.restfb.types.User;
 import jade.gui.GuiEvent;
 import java.awt.Toolkit;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -35,15 +27,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class  AfterLogin extends javax.swing.JFrame {
     
     private UserData userdata;
-    //private String[] s = null;
-     private Connection<Event> eventList;
-     private List<Event> MyeventList;
-     private Interface myAgent;
-     public static FacebookClient fbClient;
-     User user;
-  
-     //public JFrame frame;
-     //private Interface interfa;
+    private Connection<Event> eventList;
+    private List<Event> MyeventList;
+    private Interface myAgent;
+    public static FacebookClient fbClient;
+    User user;
 
     /**
      * Creates new form AfterLogin
@@ -51,37 +39,14 @@ public class  AfterLogin extends javax.swing.JFrame {
     public AfterLogin() {
         initComponents();
         setIcon();
-        //this.textArea2.setEnabled(false);
     }
     
     public AfterLogin(UserData ud,Interface i){
-    initComponents();
-    setIcon();
-    this.userdata = ud;
-    this.myAgent = i;
-    
-    this.jButton1.setEnabled(false);
-    this.jButton2.setEnabled(false);
-    this.jButton3.setEnabled(false);
-    this.textField.setEnabled(false);
-    this.jComboBox1.setEnabled(false);
-    this.jComboBox2.setEnabled(false);
-    this.jComboBox3.setEnabled(false);
-    this.jLabel3.setEnabled(false);
-    this.jLabel4.setEnabled(false);
-    this.jLabel7.setEnabled(false);
-    this.jLabel11.setEnabled(false);
-    
-   
-    //this.mostraAgentes(null);
-    }
-    
-     public AfterLogin(Interface a){
         initComponents();
         setIcon();
-        myAgent = a;
-        
-        this.jButton1.setEnabled(false);
+        this.userdata = ud;
+        this.myAgent = i;
+
         this.jButton2.setEnabled(false);
         this.jButton3.setEnabled(false);
         this.textField.setEnabled(false);
@@ -92,9 +57,23 @@ public class  AfterLogin extends javax.swing.JFrame {
         this.jLabel4.setEnabled(false);
         this.jLabel7.setEnabled(false);
         this.jLabel11.setEnabled(false);
+    }
+    
+     public AfterLogin(Interface a){
+        initComponents();
+        setIcon();
+        myAgent = a;
         
-        //this.mostraAgentes(null);
-        
+        this.jButton2.setEnabled(false);
+        this.jButton3.setEnabled(false);
+        this.textField.setEnabled(false);
+        this.jComboBox1.setEnabled(false);
+        this.jComboBox2.setEnabled(false);
+        this.jComboBox3.setEnabled(false);
+        this.jLabel3.setEnabled(false);
+        this.jLabel4.setEnabled(false);
+        this.jLabel7.setEnabled(false);
+        this.jLabel11.setEnabled(false);
     }
 
     /**
@@ -110,7 +89,6 @@ public class  AfterLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         textField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -144,16 +122,7 @@ public class  AfterLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(530, 80, 190, 30);
         getContentPane().add(textField);
-        textField.setBounds(20, 300, 270, 40);
-
-        jButton1.setText("Search events");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(770, 90, 140, 40);
+        textField.setBounds(310, 280, 270, 40);
 
         jButton2.setText("Exit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +131,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(800, 490, 130, 30);
+        jButton2.setBounds(710, 480, 130, 30);
 
         jButton3.setText("My Events");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +140,7 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(20, 350, 130, 30);
+        jButton3.setBounds(310, 340, 130, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Aceita Chuva?");
@@ -198,11 +167,6 @@ public class  AfterLogin extends javax.swing.JFrame {
         jComboBox1.setBounds(310, 210, 80, 20);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-5", "0", "5", "10", "15", "20" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
         getContentPane().add(jComboBox2);
         jComboBox2.setBounds(450, 210, 80, 26);
 
@@ -223,32 +187,15 @@ public class  AfterLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(380, 430, 160, 70);
+        jButton4.setBounds(40, 450, 160, 70);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/smart_city_blur.png"))); // NOI18N
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 950, 540);
 
-        setSize(new java.awt.Dimension(961, 573));
+        setSize(new java.awt.Dimension(885, 569));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-       String parametro = textField.getText();
-       eventList = userdata.getEventList(parametro);
-        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
-        DefaultListModel list = new DefaultListModel();
-     
-        for(List<Event> s : eventList){
-            s.forEach((e) -> {
-                list.addElement(e.getName());
-           });
-        }
-        //this.jList1 = new JList(list);
-        //this.jList1.setModel(list);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
@@ -259,36 +206,23 @@ public class  AfterLogin extends javax.swing.JFrame {
         String tempmax = jComboBox3.getSelectedItem().toString();
         
         Utilizador = mensagem+":"+chuva+":"+tempmin+":"+tempmax;
-        //GuiEvent ge;
-       // ge = new GuiEvent(mensagem,1);
-       // myAgent.postGuiEvent(ge);
       
         GuiEvent ge = new GuiEvent(Utilizador,1);
         System.out.println("criei o guievent");
+        
         if(myAgent==null){
             System.out.println("agente esta nulo");
         }
+        
         myAgent.postGuiEvent(ge);
         System.out.println("ola");
-       
-       
-        
         userdata = new UserData(getFbclient());
-        
-
         MyeventList = userdata.getMyEventList();
-        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
         DefaultListModel list;
         list = new DefaultListModel();
-      
-     
         MyeventList.forEach((e) -> {
-            
             list.addElement(e.getName());
-          
         });
-        //this.jList1 = new JList(list);
-        //this.jList1.setModel(list);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -298,48 +232,26 @@ public class  AfterLogin extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    /*
-    private void mostraEventoCompleto(String item){
-        
-        MyeventList = userdata.getMyEventList();
-        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
-        //DefaultListModel list = new DefaultListModel();
-        MyeventList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
-            textArea.setText(e.getDescription());
-        }); //ist.addElement(e.getName());
-        }*/
-        
-    
-    
+
     public void mostraOptionPane(){
         JOptionPane.showMessageDialog(null,"Not UnderStood");
         //textArea2.setText("NOT UNDERSTOOD");
     }
-    /*
-    public void mostra(){
-        this.textArea2.setText("Eventos, Tempo e Trânsito");
-    }
-    */
+    
     public void mostraAgentes(List<String> agt){
-        //DefaultListModel l = new DefaultListModel();
         System.out.println("ESTOU NULO");
         System.out.println(agt.size());
         DefaultListModel list = new DefaultListModel();
         
         for(String ss: agt){
             System.out.println(ss);
-            
             list.addElement(ss);
-            //textArea2.setEnabled(true);
-            //this.textArea2.setText(ss);
         }
-        //this.jList1 = new JList(list);
-        //this.jList1.setModel(list);
     }
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         String domain = "http://google.com";
+        String domain = "http://google.com";
         String appId = "1716266622025825";
         
         String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="+appId+"&redirect_uri="+domain+"&scope=user_about_me,"
@@ -356,56 +268,32 @@ public class  AfterLogin extends javax.swing.JFrame {
         while(true){
         
             if(!driver.getCurrentUrl().contains("facebook.com")){
-            String url = driver.getCurrentUrl();
-            accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
-            
-            driver.quit();
-            
-            fbClient = new DefaultFacebookClient(accessToken);
-               
-                
-     try{
-            // Obtem os dados do utilizador
-            UserData userdata = new UserData(fbClient);
-            user = userdata.getUser("me");
-            Interface it = new Interface();
-            
-            //Obtem os eventos do utilizador
-             //Connection<Event> eventList =  getFbclient().fetchConnection("search", Event.class,
-            // Parameter.with("q", "braga"), Parameter.with("type", "event"));
-            //AfterLogin al = new AfterLogin(userdata,it);
-            //al.setName(user.getName());
-            
-            
-            //al.setVisible(true);
-            
-            this.jButton1.setEnabled(true);
-            this.jButton2.setEnabled(true);
-            this.jButton3.setEnabled(true);
-            this.textField.setEnabled(true);
-            this.jComboBox1.setEnabled(true);
-            this.jComboBox2.setEnabled(true);
-            this.jComboBox3.setEnabled(true);
-            this.jLabel3.setEnabled(true);
-            this.jLabel4.setEnabled(true);
-            this.jLabel7.setEnabled(true);
-            this.jLabel11.setEnabled(true);
-            
-            this.jButton4.setEnabled(false);
-            this.setName(user.getName());
-            //this.textArea2.setText("OLA");
-            
-            //this.dispose();
-            
-          
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-     
-     
+                String url = driver.getCurrentUrl();
+                accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+                driver.quit();
+                fbClient = new DefaultFacebookClient(accessToken);
+                try{
+                    // Obtem os dados do utilizador
+                    UserData userdata = new UserData(fbClient);
+                    user = userdata.getUser("me");
+                    Interface it = new Interface();
+
+                    this.jButton2.setEnabled(true);
+                    this.jButton3.setEnabled(true);
+                    this.textField.setEnabled(true);
+                    this.jComboBox1.setEnabled(true);
+                    this.jComboBox2.setEnabled(true);
+                    this.jComboBox3.setEnabled(true);
+                    this.jLabel3.setEnabled(true);
+                    this.jLabel4.setEnabled(true);
+                    this.jLabel7.setEnabled(true);
+                    this.jLabel11.setEnabled(true);
+                    this.jButton4.setEnabled(false);
+                    this.setName(user.getName());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
-       
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -450,7 +338,6 @@ public class  AfterLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -467,24 +354,20 @@ public class  AfterLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
-private void setIcon() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever_icon.png")));
- }
+   
+    private void setIcon() {
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("clever_icon.png")));
+     }
 
-public void setName(String name){
-        jLabel5.setText(name);
+    public void setName(String name){
+            jLabel5.setText(name);
+        }
+
+    public void setFbclient(FacebookClient client){
+        this.fbClient = client;
     }
 
-public void setFbclient(FacebookClient client){
-    this.fbClient = client;
+    public static FacebookClient getFbclient(){
+        return fbClient;
+    }
 }
-
-public static FacebookClient getFbclient(){
-    return fbClient;
-}
-
-
-
-}
-
-

@@ -19,7 +19,6 @@ import javax.swing.DefaultListModel;
 public class ListaEventos extends javax.swing.JFrame {
 
     private List<Event> myList;
-    //private UserData userdata;
     
     /**
      * Creates new form ListaEventos
@@ -56,12 +55,8 @@ public class ListaEventos extends javax.swing.JFrame {
         this.setMyeventList(eve);
         for(Event ss: eve){
             System.out.println(ss);
-            
             list.addElement(ss.getName());
-            //textArea2.setEnabled(true);
-            //this.textArea2.setText(ss);
         }
-        //this.jList1 = new JList(list);
         this.jList1.setModel(list);
      }
     
@@ -70,14 +65,10 @@ public class ListaEventos extends javax.swing.JFrame {
     
      private void mostraEventoCompleto(String item){
         
-         myList = this.getMyeventList();
-         
-        //MyeventList = userdata.getMyEventList();
-        //DefaultListModel dlm = (DefaultListModel)this.jList1.getModel();
-        //DefaultListModel list = new DefaultListModel();
+         myList = this.getMyeventList();;
         myList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
             textArea.setText(e.getDescription());
-        }); //ist.addElement(e.getName());
+        }); 
         }
 
     /**

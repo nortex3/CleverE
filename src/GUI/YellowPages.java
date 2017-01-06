@@ -23,13 +23,10 @@ public class YellowPages extends javax.swing.JFrame {
     }
     
     public void mostraAgentes(List<String> agt){
-        //DefaultListModel l = new DefaultListModel();
         System.out.println("ESTOU NULO");
-        
         
         for(String ss: agt){
             System.out.println(ss);
-            //textArea2.setEnabled(true);
             this.textArea.setText(ss);
             System.out.println("Pus" + ss);
         }

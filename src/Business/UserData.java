@@ -8,7 +8,7 @@ package Business;
  *
  * @author Alexandre Mirra
  */
-import GUI.Login;
+
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -17,7 +17,6 @@ import com.restfb.types.Event;
 import com.restfb.types.User;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 
 //  DADOS DO UTILIZADOR
@@ -132,7 +131,6 @@ public class UserData {
                     if (e.getPlace().getLocation() != null){
                         if("Braga".equals(e.getPlace().getLocation().getCity()))
                             BragaList.add(e);
-
                     }
                 }
             });
@@ -154,7 +152,6 @@ public class UserData {
                 }
             });
         }
-        
         return BragaList;
        }
     
