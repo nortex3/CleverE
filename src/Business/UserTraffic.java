@@ -31,11 +31,12 @@ public class UserTraffic {
     
     public UserTraffic (Event event) throws IOException {
         JSONObject obj;
-        if ("CleverE".equals(event.getName())) {
-            obj = new JSONObject(this.requestJSON(40.785091,  -73.968285));
-        } else {
-            obj = new JSONObject(this.requestJSON(event.getPlace().getLocation().getLatitude(),  event.getPlace().getLocation().getLongitude()));
-        }
+        
+        //PARA FAZER O PEDIDO COM AS COORDENADAS REAIS DO EVENTO TROCAR A PROXIMA INSTRUÇÃO PELA 
+        // obj = new JSONObject(this.requestJSON(event.getPlace().getLocation().getLatitude(),  event.getPlace().getLocation().getLongitude()));
+        obj = new JSONObject(this.requestJSON(51.513415, -0.074765));
+        
+        
         
         JSONArray res = obj.getJSONArray("resourceSets").getJSONObject(0).getJSONArray("resources");
         this.acidentes = new ArrayList<>();

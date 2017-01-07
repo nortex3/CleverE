@@ -68,7 +68,6 @@ public class EnviaEvento extends CyclicBehaviour{
                     accept.setConversationId(""+time);
                     accept.addReceiver(receiver);
                     this.cont.send(accept);
-                    
                     eventosLista = (List<Event>) resp.getContentObject();
                 }
             } catch (UnreadableException ex) {
@@ -134,7 +133,6 @@ public class EnviaEvento extends CyclicBehaviour{
                         }
                         if(total <= 10){
                             listafinal.add(event);
-                            System.out.println("bazei da lista por transito" + total);
                         }
                     }
                 } catch (IOException | UnreadableException ex) {

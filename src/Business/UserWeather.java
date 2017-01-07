@@ -7,6 +7,8 @@ package Business;
 
 import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.Channel;
+import com.github.fedy2.weather.data.Forecast;
+import com.github.fedy2.weather.data.unit.DegreeUnit;
 import com.restfb.types.Event;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,64 +32,30 @@ public class UserWeather {
     Channel result;
     Meteo tempo;
     
-    // 737514 é oo codigo da yahoo de braga, nao sei como procurar codigos para outras cidades
-    /* public UserWeather() throws JAXBException, IOException {
-    this.service = new YahooWeatherService();
-    this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
-    for (Forecast dia : this.result.getItem().getForecasts()) {
-    if ("08 Dec 2016".equals(dia.getDate())) {
-    this.tempMin = dia.getLow();
-    this.tempMax = dia.getHigh();
-    this.descricao = dia.getText();
-    break;
+    // 737514 é o codigo da yahoo de braga
+    // 44418 é o código de londres
+    // SUBSTITUIR ESTE CONSTRUTOR PELO SEGUINTE PARA USAR A API DIREITO
+    /*
+    public UserWeather(Event e) throws JAXBException, IOException {
+        this.service = new YahooWeatherService();
+        this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
+        LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        for (Forecast dia : this.result.getItem().getForecasts()) {
+            LocalDate fore = dia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (eventday.equals(fore)) {
+                this.tempo = new Meteo(dia.getLow(), dia.getHigh(), dia.getText(), dia.getCode());
+                System.out.println(dia.getLow() + "\n" + dia.getHigh() + "\n" + dia.getText());
+                break;
+            }   
+        }
     }
-    }
-    }
+    */
     
-    public UserWeather(String data) throws JAXBException, IOException {
-    this.service = new YahooWeatherService();
-    this.result = service.getForecast("737514", DegreeUnit.CELSIUS);
-    for (Forecast dia : this.result.getItem().getForecasts()) {
-    if (data.equals(dia.getDate())) {
-    this.tempMin = dia.getLow();
-    this.tempMax = dia.getHigh();
-    this.descricao = dia.getText();
-    break;
-    }
-    }
-    }
-    
-    public UserWeather(String cidade, String data) throws JAXBException, IOException {
-    this.service = new YahooWeatherService();
-    this.result = service.getForecast(getWOEID(cidade), DegreeUnit.CELSIUS);
-    for (Forecast dia : this.result.getItem().getForecasts()) {
-    if (data.equals(dia.getDate())) {
-    this.tempMin = dia.getLow();
-    this.tempMax = dia.getHigh();
-    this.descricao = dia.getText();
-    break;
-    }
-    }
-    }*/
-    
-    /*public UserWeather(Event e) throws JAXBException, IOException {
-    this.service = new YahooWeatherService();
-    this.result = service.getForecast("44418", DegreeUnit.CELSIUS);
-    LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    for (Forecast dia : this.result.getItem().getForecasts()) {
-    LocalDate fore = dia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    if (eventday.equals(fore)) {
-    this.tempo = new Meteo(dia.getLow(), dia.getHigh(), dia.getText(), dia.getCode());
-    System.out.println(dia.getLow() + '\n' + dia.getHigh() + '\n'+ dia.getText());
-    break;
-    }
-    }
-    }*/
-    
+    //CONSTRUTOR PARA DADOS INVENTADOS
     public UserWeather(Event e) throws JAXBException, IOException {
         LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int coiso = eventday.getDayOfWeek().getValue();
-        if (coiso  == 1 || coiso == 3 || coiso == 5 || coiso == 7) {
+        if (coiso %2 == 0) {
             this.tempo = new Meteo(0, 14, "Showers",11);
             System.out.println(tempo.getTempMin() + "\n" + tempo.getTempMax() + "\n"+ tempo.getDescricao());
         } else {
@@ -96,6 +64,7 @@ public class UserWeather {
         }
     }
     
+    //Para eventualmente procurar em qualquer cidade
     private String getWOEID(String cidade) throws IOException {
         String url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%" + cidade + "%22%20AND%20placeTypeName.code%20%3D%207&format=json&diagnostics=true&callback=";
         URL requestUrl;

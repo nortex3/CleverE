@@ -41,11 +41,8 @@ public class RecebeInfoControlador extends CyclicBehaviour{
         if (recebida != null) {
             Object eventos = new ArrayList<>();
             if (recebida.getPerformative() == ACLMessage.INFORM) {
-                    System.out.println("ENTREI");
-                    
                 try {
                     eventos =  recebida.getContentObject();
-                    System.out.println("XXXXXXXXXXX\n" + eventos.toString());
                 } catch (UnreadableException ex) {
                     Logger.getLogger(RecebeInfoControlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
