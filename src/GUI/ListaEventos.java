@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Business.UserData;
 import com.restfb.types.Event;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class ListaEventos extends javax.swing.JFrame {
 
     public void setMyeventList(List<Event> MyeventList) {
         this.myList = MyeventList;
-        System.out.println("ESTOU NO SET");
         System.out.println(this.myList);
     }
     
@@ -58,18 +56,18 @@ public class ListaEventos extends javax.swing.JFrame {
             list.addElement(ss.getName());
         }
         this.jList1.setModel(list);
-     }
+    }
     
     
     
     
-     private void mostraEventoCompleto(String item){
+    private void mostraEventoCompleto(String item){
         
-         myList = this.getMyeventList();;
+        myList = this.getMyeventList();;
         myList.stream().filter((e) -> (e.getName().equals(item))).forEachOrdered((e) -> {
-            textArea.setText(e.getDescription());
+        textArea.setText(e.getDescription());
         }); 
-        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

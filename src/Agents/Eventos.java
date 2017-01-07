@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Agents;
+import Behaviours.EnviaEvento;
 import Business.UserData;
 import GUI.AfterLogin;
 import com.restfb.types.Event;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Miguel
@@ -73,20 +76,19 @@ public class Eventos extends Agent{
                 switch (msg.getPerformative()) {
                     case ACLMessage.REQUEST:
                         if (msg.getContent().equals("braga")) {
-                            if(user==null) 
+                            if(user ==  null) 
                                 System.out.println("user ta NULL");
                             listaEventos=user.getMyEventList();
                             try {
                                 reply.setPerformative(ACLMessage.INFORM);
                                 reply.setContentObject((Serializable) listaEventos);
                             } catch (IOException ex) {
-                                System.out.println("nao deu zzzz");
+                                Logger.getLogger(EnviaEvento.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             myAgent.send(reply);
                         }
                         break;                        
                     case ACLMessage.CONFIRM:
-                        System.out.println("Tudo OK");
                         break;
                     default:
                         reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);

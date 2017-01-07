@@ -59,10 +59,8 @@ public class RecebeInfoControlador extends CyclicBehaviour{
                 accept.setConversationId(""+time);
                 accept.addReceiver(receiver);
                 this.inter.send(accept);
-                System.out.println("RECEBI UM EVENTO DO CONTROLADOR");
 
                 if(recebida.getContent().matches("agentes:.+")){
-                    System.out.println("RECEBI INFORMAÇÃO DO CONTROLADOR");
                     List<String> agentes = new ArrayList<>(Arrays.asList(recebida.getContent().split(":")));
                     YellowPages yp = new YellowPages();
                     yp.setVisible(true);

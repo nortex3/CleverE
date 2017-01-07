@@ -26,7 +26,8 @@ public class UserData {
     public static FacebookClient fbclient = new DefaultFacebookClient();
     private User user;
     private Connection<Event> EventList;
-    private Connection<Event> MyEventList;
+    private Connection<Event> MyEventListAttending;
+    private Connection<Event> MyEventListMaybe;
     private List<Evento> listaEventos;
     
     public class Evento implements java.io.Serializable {
@@ -84,15 +85,10 @@ public class UserData {
         public double getLon() {
             return lon;
         }
-        
-        
     }
-     
-     
     
     // ESTE CONSTRUTOR NAO DA; ASSSIM E NECESSARIO PASSA O FBCLIENT:
     public UserData() {
-        
         this.user = fbclient.fetchObject("me",User.class);
     }
     
@@ -123,9 +119,10 @@ public class UserData {
     }
     
     public List<Event> getMyEventList() {
-        MyEventList = fbclient.fetchConnection("me/events/attending", Event.class);
+        MyEventListAttending = fbclient.fetchConnection("me/events/attending", Event.class);
+        MyEventListMaybe = fbclient.fetchConnection("me/events/maybe", Event.class);
         List<Event> BragaList = new ArrayList<Event>();
-        for(List<Event> s : MyEventList){
+        for(List<Event> s : MyEventListAttending){
             s.forEach((Event e) -> {
                 if(e.getPlace()!= null){
                     if (e.getPlace().getLocation() != null){
@@ -136,13 +133,24 @@ public class UserData {
             });
         }
         
+        for(List<Event> s : MyEventListMaybe){
+            s.forEach((Event e) -> {
+                if(e.getPlace()!= null){
+                    if (e.getPlace().getLocation() != null){
+                        if("Braga".equals(e.getPlace().getLocation().getCity()))
+                            BragaList.add(e);
+                    }
+                }
+            });
+        }
         return BragaList;
     }
   
     public List<Evento> getEventosList() {
-        MyEventList = fbclient.fetchConnection("me/events/attending", Event.class);
+        MyEventListAttending = fbclient.fetchConnection("me/events/attending", Event.class);
+        MyEventListMaybe = fbclient.fetchConnection("me/events/maybe", Event.class);
         List<Evento> BragaList = new ArrayList();
-        for(List<Event> s : MyEventList){
+        for(List<Event> s : MyEventListAttending){
             s.forEach((Event e) -> {
                 if(e.getPlace()!= null){
                     if (e.getPlace().getLocation() != null){
@@ -152,22 +160,27 @@ public class UserData {
                 }
             });
         }
+
+        for(List<Event> s : MyEventListMaybe){
+            s.forEach((Event e) -> {
+                if(e.getPlace()!= null){
+                    if (e.getPlace().getLocation() != null){
+                        if("Braga".equals(e.getPlace().getLocation().getCity()))
+                            BragaList.add(new Evento(e));
+                    }
+                }
+            });
+        }
         return BragaList;
-       }
+    }
     
 
     public void setEventList(Connection<Event> EventList) {
         this.EventList = EventList;
     }
     
-     public void setMyEventList(Connection<Event> MyEventList) {
-        this.MyEventList = MyEventList;
+    public void setMyEventList(Connection<Event> MyEventList,Connection<Event> MyEventListMaybe) {
+       this.MyEventListAttending = MyEventList;
+       this.MyEventListMaybe = MyEventListMaybe;
     }
-    
-    
-    
-    
-    
-    
-    
 }

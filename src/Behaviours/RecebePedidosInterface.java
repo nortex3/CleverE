@@ -19,18 +19,14 @@ public class RecebePedidosInterface extends CyclicBehaviour {
         ACLMessage mensagem = this.cont.receive();
         
         if(mensagem != null){
-            System.out.println("A MENSAGEM NAO ESTA NULA");
             System.out.println(mensagem);
-            
             if(mensagem.getPerformative() == ACLMessage.REQUEST){
-                System.out.println(mensagem.getContent());
                 String Utilizador = (String) mensagem.getContent();
                 String[] parts = Utilizador.split(":");
                 this.cont.setMensagem(parts[0]);
                 this.cont.setChuva(parts[1]);
                 this.cont.setTempMin(parts[2]);
                 this.cont.setTempMax(parts[3]);
-                System.out.println(this.cont.getMensagem()+" "+this.cont.getChuva()+" "+this.cont.getTempMax()+" "+this.cont.getTempMin());
                 
                 switch (this.cont.getMensagem()) {
                     case "daAgentes":
@@ -38,7 +34,6 @@ public class RecebePedidosInterface extends CyclicBehaviour {
                         block();
                         break;
                     case "braga":
-                        System.out.println("SOU O CONTROLADOR " + "VEM DE " +mensagem.getSender().getLocalName() + " -> " + mensagem.getContent());
                         String mens=this.cont.getMensagem();
                         new EnviaEvento(this.cont,mens).action();
                         block();

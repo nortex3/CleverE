@@ -47,7 +47,6 @@ public class Interface extends GuiAgent {
     
     protected void onGuiEvent(GuiEvent ev){
         int comand= ev.getType();
-        System.out.println("vou entrar no if");
         if(comand==1){
             String content = (String)ev.getSource();
             AID receiver = new AID();
@@ -60,7 +59,6 @@ public class Interface extends GuiAgent {
             msg.addReceiver(receiver);
             send(msg);
         }
-        System.out.println("passei pelo if");
     }
 	
     

@@ -208,14 +208,13 @@ public class  AfterLogin extends javax.swing.JFrame {
         Utilizador = mensagem+":"+chuva+":"+tempmin+":"+tempmax;
       
         GuiEvent ge = new GuiEvent(Utilizador,1);
-        System.out.println("criei o guievent");
+        System.out.println("guievent a iniciar");
         
         if(myAgent==null){
             System.out.println("agente esta nulo");
         }
         
         myAgent.postGuiEvent(ge);
-        System.out.println("ola");
         userdata = new UserData(getFbclient());
         MyeventList = userdata.getMyEventList();
         DefaultListModel list;
