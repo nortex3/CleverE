@@ -52,6 +52,7 @@ public class UserWeather {
     */
     
     //CONSTRUTOR PARA DADOS INVENTADOS
+    
     public UserWeather(Event e) throws JAXBException, IOException {
         LocalDate eventday = e.getStartTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int coiso = eventday.getDayOfWeek().getValue();
